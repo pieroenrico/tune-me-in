@@ -39,7 +39,7 @@ module.exports = {
         }]
       },
       backgroundImage: {
-        'soundwave': "url('/img/soundwave.png')"
+        'soundwave': "url('/img/soundwave-small.png')"
       }
     }
   },

@@ -101,7 +101,7 @@ export default function Index() {
         </div>
       </div>
 
-      <BannerAnimated text="Feel the music" times={5} duration="30s" />
+      <BannerAnimated text="Feel the music " times={5} duration="30s" />
 
       <FeaturedCollection title="She's got the look" />
 

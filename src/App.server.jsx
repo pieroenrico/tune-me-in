@@ -5,6 +5,7 @@ import shopifyConfig from '../shopify.config';
 
 import Main from './components/Main.server';
 import CartProvider from './contexts/CartProvider.client';
+import ResponsiveProvider from './components/simplistic/providers/ResponsiveProvider.client';
 
 export default function App({...serverState}) {
   const pages = import.meta.globEager('./pages/**/*.server.(jsx|tsx)');
@@ -13,7 +14,9 @@ export default function App({...serverState}) {
     <Suspense>
       <ShopifyServerProvider shopifyConfig={shopifyConfig} {...serverState}>
         <CartProvider>
-          <Main pages={pages} serverState={serverState} />
+          <ResponsiveProvider>
+            <Main pages={pages} serverState={serverState} />
+          </ResponsiveProvider>
         </CartProvider>
       </ShopifyServerProvider>
     </Suspense>

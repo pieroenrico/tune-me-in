@@ -73,7 +73,7 @@ const ProductCard = (props) => {
 
   return (
     <div
-      className={`product-card border border-dark p-4 transition-all bg-light-b group hover:bg-light-ff cursor-default ${className}`}
+      className={`product-card border border-dark p-4 transition-all bg-light-b group hover:bg-light-ff ${className}`}
     >
       <ProductCardImage />
 
@@ -126,7 +126,7 @@ const ProductCard = (props) => {
       </div>
 
       {addToCart && (
-        <button class="cursor-pointer mt-4 bg-dark text-white uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary">
+        <button class="soundwave active:bg-soundwave cursor-pointer mt-4 bg-dark bg-repeat-x text-white uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary">
           Add To Cart
         </button>
       )}
