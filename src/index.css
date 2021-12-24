@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@font-face {
+  font-family: 'Moniqa Black Narrow Heading';
+  src: url('../public/fonts/Moniqa-BlackNarrowHeading.woff2') format('woff2'),
+    url('../public/fonts/Moniqa-BlackNarrowHeading.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moniqa Black Narrow Display';
+  src: url('../public/fonts/Moniqa-BlackNarrowDisplay.woff2') format('woff2'),
+    url('../public/fonts/Moniqa-BlackNarrowDisplay.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moniqa Black Narrow Ita Display';
+  src: url('../public/fonts/Moniqa-BlackNarrowItaDisplay.woff2') format('woff2'),
+    url('../public/fonts/Moniqa-BlackNarrowItaDisplay.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moniqa Black Narrow Paragraph';
+  src: url('../public/fonts/Moniqa-BlackNarrowParagraph.woff2') format('woff2'),
+    url('../public/fonts/Moniqa-BlackNarrowParagraph.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moniqa Black Narrow Ita Heading';
+  src: url('../public/fonts/Moniqa-BlackNarrowItaHeading.woff2') format('woff2'),
+    url('../public/fonts/Moniqa-BlackNarrowItaHeading.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-light-b font-second;
+}
+
+.marquee {
+  white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  animation: marquee 10s linear infinite alternate;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, -50%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.soundwave:hover {
+  animation: soundwave 2s linear infinite;
+}
+@keyframes soundwave {
+  from {
+    background-position: 0 center;
+  }
+  to {
+    background-position: -352px center;
+  }
+}

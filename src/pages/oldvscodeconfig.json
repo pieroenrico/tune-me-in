@@ -1,0 +1,116 @@
+{
+    "blade.format.enable": true,
+    "css.validate": false,
+    "editor.fontFamily": "Operator Mono",
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "editor.fontSize": 17,
+    "editor.lineHeight": 25,
+    "editor.fontWeight": "100",
+    "editor.formatOnPaste": true,
+    "editor.suggestSelection": "first",
+    "editor.renderControlCharacters": false,
+    "explorer.confirmDelete": false,
+    "emmet.includeLanguages": {
+        "liquid": "html"
+    },
+    "files.autoSave": "off",
+    "indentRainbow.tabmixColor": "",
+    "indentRainbow.errorColor": "",
+    "workbench.colorTheme": "Gruvbox Material Dark",
+    "workbench.statusBar.visible": false,
+    "redhat.telemetry.enabled": false,
+    "scss.validate": false,
+    "sync.gist": "4ab972244a9d9533bc937c5119d808a0",
+    "terminal.integrated.fontFamily": "Roboto Mono",
+    "terminal.integrated.fontSize": 14,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.nativeTabs": true,
+    "window.newWindowDimensions": "maximized",
+    "workbench.fontAliasing": "auto",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true
+    },
+    "prettier.eslintIntegration": true,
+    "editor.formatOnSave": true,
+    "stylelint.enable": true,
+    "eslint.format.enable": true,
+    "eslint.validate": [
+        {
+            "language": "javascript",
+            "autoFix": true
+        },
+        {
+            "language": "javascriptreact",
+            "autoFix": true
+        },
+        {
+            "language": "vue",
+            "autoFix": true
+        },
+        {
+            "language": "vue-html",
+            "autoFix": true
+        },
+    ],
+    "[html]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "yaml.schemas": {
+        "file:///Users/pierobona/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": [
+                    "comment",
+                    "entity.name.type.class", //class names
+                    "keyword", //import, export, return…
+                    "constant", //String, Number, Boolean…, this, super
+                    "storage.modifier", //static keyword
+                    "storage.type.class.js", //class keyword
+                    //following will be in italic
+                    "comment",
+                    "emphasis",
+                    "entity.name.method.js",
+                    "entity.name.class.js",
+                    "entity.name.tag.doctype",
+                    "entity.other.attribute-name",
+                    "entity.other.attribute-name.tag.jade",
+                    "entity.other.attribute-name.tag.pug",
+                    "italic",
+                    "markup.italic",
+                    "markup.quote",
+                    "markup.changed",
+                    "markup.italic.markdown",
+                    "markup.quote.markdown",
+                    "markup.deleted.diff",
+                    "markup.inserted.diff",
+                    "storage",
+                    "storage.type",
+                    "storage.modifier",
+                    "storage.type.property.js",
+                    "storage.type.property.ts",
+                    "storage.type.property.tsx",
+                    "tag.decorator.js entity.name.tag.js",
+                    "tag.decorator.js",
+                    "text.html.basic entity.other.attribute-name.html",
+                    "text.html.basic entity.other.attribute-name"
+                ],
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    }
+}
