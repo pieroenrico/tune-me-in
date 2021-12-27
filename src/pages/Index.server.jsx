@@ -23,9 +23,10 @@ import BannerAnimated from '../components/simplistic/BannerAnimated.server';
 import HeroTriplet from '../components/simplistic/HeroTriplet.client';
 import BlogCard from '../components/simplistic/BlogCard.server';
 import FeaturedCollection from '../components/simplistic/FeaturedCollection.server';
+import FeaturedCollections from '../components/simplistic/FeaturedCollections.server';
 import FeaturedProduct from '../components/simplistic/FeaturedProduct.server';
 
-export default function Index() {
+export default function Index({selectedFeaturedCollection}) {
   const {sanityData: sanityPage, shopifyProducts} = useSanityQuery({
     query: QUERY,
   });
@@ -33,7 +34,7 @@ export default function Index() {
   //console.log('sanityPage', sanityPage);
   //console.log('shopifyProducts', shopifyProducts);
 
-  const {mainHero, featuredCollection1} = sanityPage;
+  const {mainHero, featuredCollection1, featuredCollections} = sanityPage;
 
   if (!sanityPage) {
     return <NotFound />;
@@ -45,7 +46,6 @@ export default function Index() {
       <FeaturedCollection
         title={featuredCollection1.title}
         products={featuredCollection1.products.map((product) => {
-          //console.log(shopifyProducts?.[product?.productData._id]);
           return {
             ...product.productData,
             storefront: shopifyProducts?.[product?.productData._id],
@@ -53,73 +53,18 @@ export default function Index() {
         })}
       />
 
-      <FeaturedProduct />
+      {/* <FeaturedProduct /> */}
 
-      <div className="w-full border-t border-dark 3xl:container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
-        <div className="w-full flex items-stretch justify-between">
-          <div className="py-4 pl-4 pr-2">
-            <div className="sticky top-4">
-              {/* <ProductCard addToCart className="w-[490px]" /> */}
-            </div>
-          </div>
-          <div className="py-4 pl-2 pr-2">
-            {/* <ProductCard mode="small" className="mb-4 w-[490px]" />
-            <ProductCard mode="small" className="mb-4 w-[490px]" />
-            <ProductCard mode="small" className="mb-4 w-[490px]" />
-            <ProductCard mode="small" className="mb-4 w-[490px]" />
-            <ProductCard mode="small" className="mb-4 w-[490px]" />
-            <ProductCard mode="small" className="mb-4 w-[490px]" /> */}
-          </div>
-          <div className="flex-grow py-4 pl-2 pr-4">
-            <div className="sticky top-4">
-              <ul>
-                <li>
-                  <a
-                    href="#"
-                    className="text-big font-main-display uppercase text-black underline"
-                    style={{
-                      textDecorationThickness: '1px',
-                      textUnderlineOffset: '8px',
-                    }}
-                  >
-                    Mood
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-big font-main-display uppercase text-dark"
-                  >
-                    Ocassion
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-big font-main-display uppercase text-dark"
-                  >
-                    Seasons
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-big font-main-display uppercase text-dark"
-                  >
-                    Generation
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <FeaturedCollections
+        collections={featuredCollections}
+        selectedFeaturedCollection={selectedFeaturedCollection}
+      />
 
       <BannerAnimated text="Feel the music " times={5} duration="30s" />
 
       {/* <FeaturedCollection title="She's got the look" /> */}
 
-      <div className="w-full border-t border-dark container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
+      <div className="w-full border-t border-dark container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark hidden">
         <div className="w-full flex items-stretch justify-between">
           <div className="py-4 pl-4 pr-2">
             <div className="sticky top-4">
@@ -314,6 +259,10 @@ const QUERY = groq`
           ...${PRODUCT_WITH_VARIANT}
         }
       }
+    },
+    featuredCollections[] {
+      title,
+      handle
     }
   }
 `;

@@ -90,3 +90,34 @@ body {
     auto;
     stylelint-enable 
 } */
+
+.bg-product-black {
+  background-color: #191919;
+}
+.bg-product-cyan {
+  background-color: #8ccbcc;
+}
+.bg-product-violet {
+  background-color: #8c82a2;
+}
+.bg-product-imperial {
+  background-color: #ec444f;
+}
+.bg-product-green {
+  background-color: #2cba72;
+}
+.bg-product-blue {
+  background-color: #487f9c;
+}
+.bg-product-goldenrod {
+  background-color: #d19b26;
+}
+.bg-product-yellow {
+  background-color: #fafc4e;
+}
+.bg-product-red {
+  background-color: #ff0000;
+}
+.bg-product-white {
+  background-color: #fafafa;
+}
