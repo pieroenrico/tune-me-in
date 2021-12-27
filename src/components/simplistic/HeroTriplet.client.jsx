@@ -2,7 +2,8 @@ import {useState, useRef} from 'react';
 import {Slider, Slide} from './Slider.client';
 
 const HeroTriplet = (props) => {
-  const {images} = props;
+  const {data} = props;
+  const {title, bgImage, carousel} = data;
   const [currentSlide, setCurrentSlide] = useState(0);
   const mainSlider = useRef();
   const secondSlider = useRef();
@@ -10,10 +11,12 @@ const HeroTriplet = (props) => {
 
   const handleSlideChange = (slide) => {
     if (secondSlider && secondSlider.current) {
-      secondSlider.current.goToSlide(slide);
+      const nextSlide = slide + 1 === carousel.length ? 0 : slide + 1;
+      secondSlider.current.goToSlide(nextSlide);
     }
     if (thirdSlider && thirdSlider.current) {
-      thirdSlider.current.goToSlide(slide);
+      const nextSlide = slide + 2 === carousel.length ? 0 : slide + 2;
+      thirdSlider.current.goToSlide(nextSlide);
     }
   };
 
@@ -21,7 +24,7 @@ const HeroTriplet = (props) => {
     <div className="3xl:container 3xl:mx-auto">
       <div
         className="w-full bg-cover bg-no-repeat bg-center h-[60vh] min-h-[1000px] flex items-center justify-between overflow-hidden"
-        style={{backgroundImage: `url('../../public/img/bg1b.jpg')`}}
+        style={{backgroundImage: `url('${bgImage.url}')`}}
       >
         <div className="w-1/3 h-full flex items-center justify-end">
           <div className="w-3/5 translate-x-4 z-10" style={{height: 400}}>
@@ -32,15 +35,15 @@ const HeroTriplet = (props) => {
                   perView: 1,
                   spacing: 0,
                 },
-                loop: false,
+                loop: true,
                 initial: 1,
               }}
             >
-              {images.map((image, idx) => (
+              {carousel.map((slide, idx) => (
                 <Slide key={idx}>
                   <div
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{backgroundImage: `url('${image.image.url}')`}}
+                    style={{backgroundImage: `url('${slide.image.url}')`}}
                   ></div>
                 </Slide>
               ))}
@@ -56,17 +59,17 @@ const HeroTriplet = (props) => {
                   perView: 1,
                   spacing: 0,
                 },
-                loop: false,
+                loop: true,
                 initial: 0,
               }}
               onSlideChange={handleSlideChange}
               autoplay
             >
-              {images.map((image, idx) => (
+              {carousel.map((slide, idx) => (
                 <Slide key={idx}>
                   <div
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{backgroundImage: `url('${image.image.url}')`}}
+                    style={{backgroundImage: `url('${slide.image.url}')`}}
                   ></div>
                 </Slide>
               ))}
@@ -82,15 +85,15 @@ const HeroTriplet = (props) => {
                   perView: 1,
                   spacing: 0,
                 },
-                loop: false,
+                loop: true,
                 initial: 2,
               }}
             >
-              {images.map((image, idx) => (
+              {carousel.map((slide, idx) => (
                 <Slide key={idx}>
                   <div
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{backgroundImage: `url('${image.image.url}')`}}
+                    style={{backgroundImage: `url('${slide.image.url}')`}}
                   ></div>
                 </Slide>
               ))}

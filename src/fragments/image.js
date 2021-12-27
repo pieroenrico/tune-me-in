@@ -16,4 +16,5 @@ export const IMAGE = groq`
   "blurDataURL": asset->metadata.lqip,
   'height': asset->metadata.dimensions.height,
   'width': asset->metadata.dimensions.width,
+  'url': asset->url
 `;

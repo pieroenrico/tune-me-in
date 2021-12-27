@@ -1,11 +1,12 @@
 import SectionTitle from './SectionTitle.server';
-import ProductCard from './ProductCard.server';
+import ProductCard from './ProductCard.client';
 import {Slider, Slide} from './Slider.client';
 import {useResponsive} from './providers/ResponsiveProvider.client';
 
 const FeaturedCollection = (props) => {
-  const {title} = props;
+  const {title, products} = props;
   const {screens} = useResponsive();
+  // console.log('fep', products);
   return (
     <>
       <SectionTitle title={title} />
@@ -32,78 +33,17 @@ const FeaturedCollection = (props) => {
             },
           }}
         >
-          <Slide key={1}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
-          <Slide key={2}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
-          <Slide key={3}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
-          <Slide key={4}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
-          <Slide key={5}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
-          <Slide key={6}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
-          <Slide key={7}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
-          <Slide key={8}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
-          <Slide key={9}>
-            <ProductCard
-              mode="small-interactive"
-              addToCart
-              detailsLink
-              className="mr-4"
-            />
-          </Slide>
+          {products.map((product, idx) => (
+            <Slide key={idx}>
+              <ProductCard
+                product={product}
+                mode="small-interactive"
+                addToCart
+                detailsLink
+                className="mr-4"
+              />
+            </Slide>
+          ))}
         </Slider>
       </div>
     </>

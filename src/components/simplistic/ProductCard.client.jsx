@@ -20,9 +20,10 @@ const ProductCardOptions = (props) => {
         <div className="product-selector text-2xl flex items-center">
           <div className="font-extrabold mr-4">{title}</div>
           <div className="options flex items-center font-thin">
-            {options.map((option) => {
+            {options.map((option, i) => {
               return (
                 <div
+                  key={i}
                   className={`option mr-2 rounded-full w-6 h-6 cursor-pointer ${option}`}
                 ></div>
               );
@@ -35,6 +36,7 @@ const ProductCardOptions = (props) => {
           <div className="options flex items-center font-thin">
             {options.map((option, i) => (
               <div
+                key={i}
                 className={`option  cursor-pointer mr-1 after:pl-1 ${
                   i < options.length - 1 ? `after:content-['/']` : ''
                 }`}
@@ -138,7 +140,7 @@ const ProductCard = (props) => {
         </div>
 
         {addToCart && (
-          <button class="soundwave active:bg-soundwave cursor-pointer mt-4 bg-dark bg-repeat-x text-white uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary">
+          <button className="soundwave active:bg-soundwave cursor-pointer mt-4 bg-dark bg-repeat-x text-white uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary">
             Add To Cart
           </button>
         )}
