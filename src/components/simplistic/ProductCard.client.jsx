@@ -14,7 +14,7 @@ const ProductCard = (props) => {
       <ProductMediaProvider
         value={product.storefront.images.edges.map((edge) => edge.node)}
       >
-        <ProductCardDetails {...props} />
+        <ProductCardDetails {...props} key={product._id} />
       </ProductMediaProvider>
     </Product>
   );

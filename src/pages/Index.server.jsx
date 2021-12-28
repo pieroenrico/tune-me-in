@@ -18,8 +18,6 @@ import {PRODUCT_WITH_VARIANT} from '../fragments/productWithVariant';
 import {SEO} from '../fragments/seo';
 
 import {Slider, Slide} from '../components/simplistic/Slider.client';
-import SectionTitle from '../components/simplistic/SectionTitle.server';
-import ProductCard from '../components/simplistic/ProductCard.server';
 import BannerAnimated from '../components/simplistic/BannerAnimated.server';
 import HeroTriplet from '../components/simplistic/HeroTriplet.client';
 import BlogCard from '../components/simplistic/BlogCard.server';

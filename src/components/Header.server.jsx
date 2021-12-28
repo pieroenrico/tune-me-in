@@ -9,17 +9,18 @@ export default function Header() {
 
   return (
     <header
-      className="backdrop-filter backdrop-blur-lg bg-opacity-80 bg-white border-b border-black flex items-start justify-between h-20 p-4 sticky top-0 w-full z-50"
+      className="bg-light-b border-b border-dark flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50"
       role="banner"
     >
       <div className="">
         <div>
           <Link className="font-medium" to="/">
-            Sanity + Hydrogen demo store
+            <img src="/img/logo.png" alt="Tune me In" className="w-24" />
           </Link>
         </div>
         {/* {data?.menu?.links && <HeaderMenu links={data.menu.links} />} */}
       </div>
+      <div className="menu">wqrqwr qwrqwrwqr</div>
       <CartToggleButton />
     </header>
   );

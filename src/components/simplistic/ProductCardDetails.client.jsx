@@ -6,11 +6,14 @@ import ProductCardImage from './ProductCardImage.client';
 import ProductCardOptions from './ProductCardOptions.client';
 import ProductCardPrice from './ProductCardPrice.client';
 import {useProductMedia} from './providers/ProductMediaProvider.client';
+import LinkProduct from '../LinkProduct.client';
 
 const ProductCardDetails = (props) => {
   const {className, addToCart, detailsLink, mode, onClick} = props;
   const {
     id,
+    handle,
+    variantId,
     options,
     selectedOptions,
     setSelectedOption,
@@ -55,7 +58,7 @@ const ProductCardDetails = (props) => {
         if (onClick) onClick(e);
       }}
     >
-      <ProductCardImage image={selectedImage?.url} />
+      <ProductCardImage image={selectedImage?.url} key={id} />
       <div className={`${mode === 'small-interactive' ? `relative` : ''}`}>
         <div className={`flex items-start justify-between mt-4`}>
           <div
@@ -115,9 +118,13 @@ const ProductCardDetails = (props) => {
         </Product.SelectedVariant.AddToCartButton>
       )}
       {detailsLink && (
-        <a href="" className="mt-4 text-center block font-light underline">
+        <LinkProduct
+          handle={handle}
+          variantId={variantId}
+          className="mt-4 text-center block font-light underline"
+        >
           View Product Details
-        </a>
+        </LinkProduct>
       )}
     </div>
   );

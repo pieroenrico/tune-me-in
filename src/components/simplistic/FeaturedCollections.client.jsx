@@ -22,7 +22,7 @@ const FeaturedCollections = (props) => {
     <div className="w-full border-t border-dark 3xl:container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
       <div className="w-full flex items-stretch justify-between">
         <div className="py-4 pl-4 pr-2 w-1/3">
-          <div className="sticky top-4">
+          <div className="sticky top-24">
             <ProductCard
               key={currentProduct?.productData._id}
               addToCart
@@ -52,7 +52,7 @@ const FeaturedCollections = (props) => {
           ))}
         </div>
         <div className="flex-grow py-4 pl-2 pr-4">
-          <div className="sticky top-4">
+          <div className="sticky top-24">
             <FeaturedCollectionsList
               collections={collections}
               selectedCollection={currentCollection}

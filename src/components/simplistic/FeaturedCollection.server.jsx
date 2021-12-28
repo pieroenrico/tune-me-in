@@ -34,8 +34,9 @@ const FeaturedCollection = (props) => {
           }}
         >
           {products.map((product, idx) => (
-            <Slide key={idx}>
+            <Slide key={product._id}>
               <ProductCard
+                key={product._id}
                 product={product}
                 mode="small-interactive"
                 addToCart

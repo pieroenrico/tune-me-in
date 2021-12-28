@@ -6,7 +6,27 @@ import PortableText from './PortableText.client';
 
 export default function Footer() {
   // const data = useSettingsContext();
-  return <span>Footer</span>;
+  return (
+    <div className="w-full flex items-start justify-between p-4 border-t border-dark">
+      <div className="w-3/5">
+        <h2>Subscribe</h2>
+      </div>
+      <div className="w-1/5">
+        <ul>
+          <li>About</li>
+          <li>Blog</li>
+          <li>Fabrics</li>
+        </ul>
+      </div>
+      <div className="w-1/5">
+        <ul>
+          <li>About</li>
+          <li>Blog</li>
+          <li>Fabrics</li>
+        </ul>
+      </div>
+    </div>
+  );
   // return (
   //   <footer role="contentinfo" className="border-t border-black mt-32 p-4">
   //     {/* Links */}

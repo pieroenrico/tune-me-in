@@ -8,7 +8,6 @@ import {Link, useServerState} from '@shopify/hydrogen/client';
  */
 const LinkProduct = (props) => {
   const {children, className, handle, onClick, variantId} = props;
-
   const {setServerState} = useServerState();
 
   // Return early with children if no valid handle found
