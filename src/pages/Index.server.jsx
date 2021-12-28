@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import groq from 'groq';
+import gql from 'graphql-tag';
 import {useSanityQuery} from 'hydrogen-plugin-sanity';
 import React from 'react';
 
@@ -23,25 +24,50 @@ import BannerAnimated from '../components/simplistic/BannerAnimated.server';
 import HeroTriplet from '../components/simplistic/HeroTriplet.client';
 import BlogCard from '../components/simplistic/BlogCard.server';
 import FeaturedCollection from '../components/simplistic/FeaturedCollection.server';
-import FeaturedCollections from '../components/simplistic/FeaturedCollections.server';
-import FeaturedProduct from '../components/simplistic/FeaturedProduct.server';
+import FeaturedCollections from '../components/simplistic/FeaturedCollections.client';
+import SponsoredArticle from '../components/simplistic/SponsoredArticle.server';
+import {ProductProviderFragment} from '@shopify/hydrogen/dist/esnext/graphql/graphql-constants';
 
-export default function Index({selectedFeaturedCollection}) {
+export default function Index() {
   const {sanityData: sanityPage, shopifyProducts} = useSanityQuery({
     query: QUERY,
+    getProductGraphQLFragment: () => {
+      return `
+        ...ProductProviderFragment
+        images(first: 10) {
+          edges {
+            node {
+              altText
+              url
+            }
+          }
+        }
+      `;
+    },
   });
 
   //console.log('sanityPage', sanityPage);
-  //console.log('shopifyProducts', shopifyProducts);
+  // console.log(
+  //   'shopifyProducts',
+  //   shopifyProducts['shopifyProduct-7520768884992'].images.edges,
+  // );
 
-  const {mainHero, featuredCollection1, featuredCollections} = sanityPage;
+  const {
+    mainHero,
+    featuredCollection1,
+    featuredCollection2,
+    featuredCollection3,
+    animatedBanner,
+    sponsoredArticle,
+    featuredCollections,
+  } = sanityPage;
 
   if (!sanityPage) {
     return <NotFound />;
   }
   return (
     <>
-      {/* <HeroTriplet data={mainHero} /> */}
+      <HeroTriplet data={mainHero} />
 
       <FeaturedCollection
         title={featuredCollection1.title}
@@ -53,16 +79,24 @@ export default function Index({selectedFeaturedCollection}) {
         })}
       />
 
-      {/* <FeaturedProduct /> */}
+      <SponsoredArticle data={sponsoredArticle} />
 
       <FeaturedCollections
         collections={featuredCollections}
-        selectedFeaturedCollection={selectedFeaturedCollection}
+        shopifyProducts={shopifyProducts}
       />
 
-      <BannerAnimated text="Feel the music " times={5} duration="30s" />
+      <BannerAnimated data={animatedBanner} />
 
-      {/* <FeaturedCollection title="She's got the look" /> */}
+      <FeaturedCollection
+        title={featuredCollection2.title}
+        products={featuredCollection2.products.map((product) => {
+          return {
+            ...product.productData,
+            storefront: shopifyProducts?.[product?.productData._id],
+          };
+        })}
+      />
 
       <div className="w-full border-t border-dark container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark hidden">
         <div className="w-full flex items-stretch justify-between">
@@ -99,7 +133,15 @@ export default function Index({selectedFeaturedCollection}) {
         </div>
       </div>
 
-      {/* <FeaturedCollection title="Seasons" /> */}
+      <FeaturedCollection
+        title={featuredCollection3.title}
+        products={featuredCollection3.products.map((product) => {
+          return {
+            ...product.productData,
+            storefront: shopifyProducts?.[product?.productData._id],
+          };
+        })}
+      />
 
       <div className="w-full px-4 pt-6 pb-0 border-t border-b border-secondary flex items-center 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
         <h2 className="font-main-display text-huge uppercase text-secondary">
@@ -260,9 +302,49 @@ const QUERY = groq`
         }
       }
     },
+    featuredCollection2 {
+      title,
+      products[] {
+        'productData': productWithVariant {
+          ...${PRODUCT_WITH_VARIANT}
+        }
+      }
+    },
+    featuredCollection3 {
+      title,
+      products[] {
+        'productData': productWithVariant {
+          ...${PRODUCT_WITH_VARIANT}
+        }
+      }
+    },
     featuredCollections[] {
       title,
-      handle
+      handle,
+      products[] {
+        'productData': productWithVariant {
+          ...${PRODUCT_WITH_VARIANT}
+        }
+      }
+    },
+    animatedBanner {
+      bgImage {
+        ${IMAGE}
+      },
+      fgImage {
+        ${IMAGE}
+      },
+      title,
+      repeat,
+      duration
+    },
+    sponsoredArticle {
+      image {
+        ${IMAGE}
+      },
+      title,
+      mainText,
+      secondaryText
     }
   }
 `;

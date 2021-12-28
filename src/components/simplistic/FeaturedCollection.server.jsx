@@ -1,5 +1,5 @@
 import SectionTitle from './SectionTitle.server';
-import ProductCard from './ProductCard.server';
+import ProductCard from './ProductCard.client';
 import {Slider, Slide} from './Slider.client';
 import {useResponsive} from './providers/ResponsiveProvider.client';
 

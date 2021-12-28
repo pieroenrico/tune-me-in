@@ -1,7 +1,5 @@
-import {useServerState} from '@shopify/hydrogen/client';
 const FeaturedCollectionsList = (props) => {
-  const {collections, selectedCollection} = props;
-  const {setServerState} = useServerState();
+  const {collections, selectedCollection, setSelectedCollection} = props;
   return (
     <ul>
       {collections.map((collection, idx) => (
@@ -10,11 +8,19 @@ const FeaturedCollectionsList = (props) => {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              setServerState('selectedFeaturedCollection', collection.handle);
+              setSelectedCollection(collection.handle);
             }}
+            style={
+              selectedCollection === collection.handle
+                ? {
+                    textDecorationThickness: '1px',
+                    textUnderlineOffset: '8px',
+                  }
+                : {}
+            }
             className={`text-big font-main-display uppercase ${
               selectedCollection === collection.handle
-                ? `text-black`
+                ? `text-black underline`
                 : `text-dark`
             }`}
           >
