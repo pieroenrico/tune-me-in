@@ -26,6 +26,7 @@ import BlogCard from '../components/simplistic/BlogCard.server';
 import FeaturedCollection from '../components/simplistic/FeaturedCollection.server';
 import FeaturedCollections from '../components/simplistic/FeaturedCollections.client';
 import SponsoredArticle from '../components/simplistic/SponsoredArticle.server';
+import FeaturedBlog from '../components/simplistic/FeaturedBlog.server';
 import {ProductProviderFragment} from '@shopify/hydrogen/dist/esnext/graphql/graphql-constants';
 
 export default function Index() {
@@ -34,6 +35,14 @@ export default function Index() {
     getProductGraphQLFragment: () => {
       return `
         ...ProductProviderFragment
+        mf:metafields(namespace:"tunemein", first:1){
+          edges {
+            node {
+              key
+              value
+            }
+          }
+        }
         images(first: 10) {
           edges {
             node {
@@ -46,10 +55,10 @@ export default function Index() {
     },
   });
 
-  //console.log('sanityPage', sanityPage);
+  // console.log('sanityPage', sanityPage.blog);
   // console.log(
   //   'shopifyProducts',
-  //   shopifyProducts['shopifyProduct-7520768884992'].images.edges,
+  //   shopifyProducts['shopifyProduct-7520769835264'].mf.edges,
   // );
 
   const {
@@ -60,13 +69,14 @@ export default function Index() {
     animatedBanner,
     sponsoredArticle,
     featuredCollections,
+    blog,
   } = sanityPage;
 
   if (!sanityPage) {
     return <NotFound />;
   }
   return (
-    <>
+    <Layout>
       <HeroTriplet data={mainHero} />
 
       <FeaturedCollection
@@ -143,38 +153,8 @@ export default function Index() {
         })}
       />
 
-      <div className="w-full px-4 pt-6 pb-0 border-t border-b border-secondary flex items-center 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
-        <h2 className="font-main-display text-huge uppercase text-secondary">
-          LifeStyle
-        </h2>
-      </div>
-      <div className="py-4 pl-4 3xl:mx-auto 3xl:container 3xl:border-l 3xl:border-r 3xl:border-dark">
-        <Slider
-          sliderConfig={{
-            slides: {
-              perView: 2.2,
-              spacing: 4,
-            },
-            loop: false,
-            initial: 0,
-          }}
-          onSlideChange={() => false}
-        >
-          <Slide key={1}>
-            <BlogCard className="mr-4" />
-          </Slide>
-          <Slide key={2}>
-            <BlogCard className="mr-4" />
-          </Slide>
-          <Slide key={3}>
-            <BlogCard className="mr-4" />
-          </Slide>
-          <Slide key={4}>
-            <BlogCard className="mr-4" />
-          </Slide>
-        </Slider>
-      </div>
-    </>
+      <FeaturedBlog data={blog} />
+    </Layout>
   );
   /*
   return (
@@ -345,6 +325,19 @@ const QUERY = groq`
       title,
       mainText,
       secondaryText
+    },
+    blog {
+      title,
+      featuredArticles[] {
+        article-> { 
+          title, 
+          "slug": slug.current, 
+          extract,
+          image {
+            ${IMAGE}
+          }
+        }
+      }
     }
   }
 `;

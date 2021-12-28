@@ -1,11 +1,11 @@
 import {Link} from '@shopify/hydrogen';
 
-import {useSettingsContext} from '../contexts/SettingsContext.server';
+// import {useSettingsContext} from '../contexts/SettingsContext.server';
 import CartToggleButton from './CartToggleButton.client';
 import HeaderMenu from './HeaderMenu.client';
 
 export default function Header() {
-  const data = useSettingsContext();
+  // const data = useSettingsContext();
 
   return (
     <header
@@ -18,7 +18,7 @@ export default function Header() {
             Sanity + Hydrogen demo store
           </Link>
         </div>
-        {data?.menu?.links && <HeaderMenu links={data.menu.links} />}
+        {/* {data?.menu?.links && <HeaderMenu links={data.menu.links} />} */}
       </div>
       <CartToggleButton />
     </header>

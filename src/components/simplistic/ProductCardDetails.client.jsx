@@ -9,9 +9,21 @@ import {useProductMedia} from './providers/ProductMediaProvider.client';
 
 const ProductCardDetails = (props) => {
   const {className, addToCart, detailsLink, mode, onClick} = props;
-  const {id, options, selectedOptions, setSelectedOption, selectedVariant} =
-    useProduct();
+  const {
+    id,
+    options,
+    selectedOptions,
+    setSelectedOption,
+    selectedVariant,
+    mf: metafields,
+  } = useProduct();
   const {media} = useProductMedia();
+  const playlist = metafields.edges.length
+    ? JSON.parse(
+        metafields.edges.find((edge) => edge.node.key === 'playlist').node
+          .value,
+      )
+    : null;
 
   const [selectedImage, setSelectedImage] = useState();
   useEffect(() => {
@@ -44,7 +56,6 @@ const ProductCardDetails = (props) => {
       }}
     >
       <ProductCardImage image={selectedImage?.url} />
-
       <div className={`${mode === 'small-interactive' ? `relative` : ''}`}>
         <div className={`flex items-start justify-between mt-4`}>
           <div
@@ -82,25 +93,27 @@ const ProductCardDetails = (props) => {
               </div>
             )}
           </div>
-          {/* <ProductCardPrice price={selectedVariant.priceV2.amount} /> */}
+          <ProductCardPrice price={selectedVariant?.priceV2.amount} />
         </div>
       </div>
-
-      <div
-        className={`product-details font-light ${
-          mode === 'large' ? `text-lg` : `truncate`
-        }`}
-      >
-        Lorem ipsum / dolor sit amet / qui minim labore / adipisicing minim sint
-        cillum sint consectetur cupidatat.
-      </div>
-
-      {addToCart && (
-        <button className="soundwave active:bg-soundwave cursor-pointer mt-4 bg-dark bg-repeat-x text-white uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary">
-          Add To Cart
-        </button>
+      {playlist && (
+        <div
+          className={`product-details font-light ${
+            mode === 'large' ? `text-lg` : `truncate`
+          }`}
+        >
+          {playlist.map((song, s) => (
+            <span key={s}>{song.author} / </span>
+          ))}
+        </div>
       )}
-
+      {addToCart && (
+        <Product.SelectedVariant.AddToCartButton
+          className={`cursor-pointer mt-4 bg-dark bg-repeat-x text-white uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary`}
+        >
+          Add To Cart
+        </Product.SelectedVariant.AddToCartButton>
+      )}
       {detailsLink && (
         <a href="" className="mt-4 text-center block font-light underline">
           View Product Details

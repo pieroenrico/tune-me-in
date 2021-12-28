@@ -12,11 +12,15 @@ const HeroTriplet = (props) => {
   const handleSlideChange = (slide) => {
     if (secondSlider && secondSlider.current) {
       const nextSlide = slide + 1 === carousel.length ? 0 : slide + 1;
-      secondSlider.current.goToSlide(nextSlide);
+      setTimeout(() => {
+        secondSlider.current.goToSlide(nextSlide);
+      }, 200);
     }
     if (thirdSlider && thirdSlider.current) {
       const nextSlide = slide + 2 === carousel.length ? 0 : slide + 2;
-      thirdSlider.current.goToSlide(nextSlide);
+      setTimeout(() => {
+        thirdSlider.current.goToSlide(nextSlide);
+      }, 400);
     }
   };
 
@@ -27,7 +31,10 @@ const HeroTriplet = (props) => {
         style={{backgroundImage: `url('${bgImage.url}')`}}
       >
         <div className="w-1/3 h-full flex items-center justify-end">
-          <div className="w-3/5 translate-x-4 z-10" style={{height: 400}}>
+          <div
+            className="w-3/5 translate-x-4 -translate-y-24 z-10"
+            style={{height: 400}}
+          >
             <Slider
               ref={secondSlider}
               sliderConfig={{
@@ -35,6 +42,7 @@ const HeroTriplet = (props) => {
                   perView: 1,
                   spacing: 0,
                 },
+                drag: false,
                 loop: true,
                 initial: 1,
               }}
@@ -59,6 +67,7 @@ const HeroTriplet = (props) => {
                   perView: 1,
                   spacing: 0,
                 },
+                drag: false,
                 loop: true,
                 initial: 0,
               }}
@@ -77,7 +86,10 @@ const HeroTriplet = (props) => {
           </div>
         </div>
         <div className="w-1/3 h-full flex items-center justify-start">
-          <div className="w-3/5 -translate-x-4 z-10" style={{height: 400}}>
+          <div
+            className="w-3/5 -translate-x-4 translate-y-24 z-10"
+            style={{height: 400}}
+          >
             <Slider
               ref={thirdSlider}
               sliderConfig={{
@@ -85,6 +97,7 @@ const HeroTriplet = (props) => {
                   perView: 1,
                   spacing: 0,
                 },
+                drag: false,
                 loop: true,
                 initial: 2,
               }}
