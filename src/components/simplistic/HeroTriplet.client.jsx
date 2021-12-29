@@ -13,13 +13,13 @@ const HeroTriplet = (props) => {
     if (secondSlider && secondSlider.current) {
       const nextSlide = slide + 1 === carousel.length ? 0 : slide + 1;
       setTimeout(() => {
-        secondSlider.current.goToSlide(nextSlide);
+        secondSlider?.current.goToSlide(nextSlide);
       }, 200);
     }
     if (thirdSlider && thirdSlider.current) {
       const nextSlide = slide + 2 === carousel.length ? 0 : slide + 2;
       setTimeout(() => {
-        thirdSlider.current.goToSlide(nextSlide);
+        thirdSlider?.current.goToSlide(nextSlide);
       }, 400);
     }
   };
@@ -27,8 +27,8 @@ const HeroTriplet = (props) => {
   return (
     <div className="3xl:container 3xl:mx-auto relative">
       <div className="w-full h-full absolute z-30 flex items-center justify-center group">
-        <div className="text-[#bf5b47] text-[12em] font-extrabold transition-all opacity-100 group-hover:opacity-0">
-          Tune me in
+        <div className="text-[#bf5b47] text-[28em] font-extrabold transition-all opacity-100 group-hover:opacity-0">
+          TMI
         </div>
       </div>
       <div

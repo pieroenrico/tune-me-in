@@ -121,3 +121,33 @@ body {
 .bg-product-white {
   background-color: #fafafa;
 }
+
+header {
+  @apply bg-transparent flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50;
+}
+header .logo {
+  @apply w-[100px] h-[45px] flex items-center justify-center relative overflow-hidden transition-all delay-100;
+  background-position-x: -100%;
+}
+header .logo-text {
+  @apply text-dark text-2xl font-extrabold absolute -translate-y-full transition-all;
+}
+header .menu {
+  @apply text-light-b font-semibold uppercase transition-all opacity-0;
+}
+header.always-black,
+header.scrolled {
+  @apply bg-light-b border-b border-dark flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50;
+}
+header.always-black .menu,
+header.scrolled .menu {
+  @apply text-dark opacity-100;
+}
+header.always-black .logo,
+header.scrolled .logo {
+  background-position-x: 0;
+}
+header.always-black .logo-text,
+header.scrolled .logo-text {
+  @apply translate-y-0;
+}

@@ -1,7 +1,7 @@
 const ProductCardImage = (props) => {
   const {image} = props;
   const imageSmall = image?.replace('.png', '_500x.png');
-  console.log('image', image);
+  //console.log('image', image);
   return (
     <div
       className="relative bg-grey border border-dark aspect-w-1 aspect-h-1 overflow-hidden"

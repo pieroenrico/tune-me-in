@@ -1,40 +1,39 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 
-export default function HeaderScroll({children}) {
+export default function HeaderScroll({alwaysBlack, children}) {
   let listener = null;
-  const [scrollState, setScrollState] = useState('top');
-  const styleNotScrolled = `bg-transparent flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50`;
-  const styleScrolled = `bg-light-b border-b border-dark flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50`;
+  const [scrollState, _setScrollState] = useState('top');
+  const scrollStateRef = useRef(scrollState);
+  const setScrollState = (state) => {
+    scrollStateRef.current = state;
+    _setScrollState(state);
+  };
+
+  const scrollListener = () => {
+    var scrolled = document.scrollingElement.scrollTop;
+    if (scrolled >= 400) {
+      if (scrollStateRef.current !== 'scrolled') {
+        setScrollState('scrolled');
+      }
+    } else {
+      if (scrollStateRef.current !== 'top') {
+        setScrollState('top');
+      }
+    }
+  };
 
   useEffect(() => {
-    listener = document.addEventListener('scroll', (e) => {
-      var scrolled = document.scrollingElement.scrollTop;
-      if (scrolled >= 400) {
-        if (scrollState !== 'scrolled') {
-          setScrollState('scrolled');
-        }
-      } else {
-        if (scrollState !== 'top') {
-          setScrollState('top');
-        }
-      }
-    });
+    listener = window.addEventListener('scroll', scrollListener);
     return () => {
       document.removeEventListener('scroll', listener);
+      listener = null;
+      setScrollState('top');
     };
-  }, [scrollState]);
+  }, []);
 
   return (
-    <header
-      className={scrollState === 'scrolled' ? styleScrolled : styleNotScrolled}
-    >
+    <header className={`${alwaysBlack ? `always-black` : ``} ${scrollState}`}>
       {children}
     </header>
   );
 }
-
-/*
-// <header
-    //   className="bg-light-b border-b border-dark flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50"
-    //   role="banner"
-    // >*/

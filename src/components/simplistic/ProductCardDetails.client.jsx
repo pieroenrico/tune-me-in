@@ -42,7 +42,7 @@ const ProductCardDetails = (props) => {
     } else {
       setSelectedImage(media[Math.floor(Math.random() * media.length)]);
     }
-    () => {
+    return () => {
       setSelectedImage(null);
     };
   }, [id, selectedVariant]);
@@ -58,7 +58,13 @@ const ProductCardDetails = (props) => {
         if (onClick) onClick(e);
       }}
     >
-      <ProductCardImage image={selectedImage?.url} key={id} />
+      <LinkProduct
+        handle={handle}
+        variantId={variantId}
+        className="mt-4 text-center block font-light underline"
+      >
+        <ProductCardImage image={selectedImage?.url} key={id} />
+      </LinkProduct>
       <div className={`${mode === 'small-interactive' ? `relative` : ''}`}>
         <div className={`flex items-start justify-between mt-4`}>
           <div

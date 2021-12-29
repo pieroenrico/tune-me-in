@@ -39,7 +39,8 @@ module.exports = {
         }]
       },
       backgroundImage: {
-        'soundwave': "url('/img/soundwave-small.png')"
+        'soundwave': "url('/img/soundwave-small.png')",
+        'logo': "url('/img/logo-2.png')"
       }
     }
   },

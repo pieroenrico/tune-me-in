@@ -5,28 +5,34 @@ import CartToggleButton from './CartToggleButton.client';
 import HeaderMenu from './HeaderMenu.client';
 import HeaderScroll from './simplistic/HeaderScroll.client';
 
-export default function Header() {
+export default function Header(props) {
   // const data = useSettingsContext();
 
   return (
-    <HeaderScroll>
+    <HeaderScroll {...props}>
       <div className="">
         <div>
-          <Link className="font-medium" to="/">
-            <div
-              className="logo w-[120px] bg-contain bg-center bg-repeat-x h-[45px] flex items-center justify-center"
-              style={{
-                backgroundImage: `url('/img/logo.png')`,
-              }}
-            >
-              <div className="text-light-f text-2xl font-extrabold">TMI</div>
+          <Link to="/">
+            <div className="logo bg-logo">
+              <div className="logo-text">TMI</div>
             </div>
           </Link>
         </div>
         {/* {data?.menu?.links && <HeaderMenu links={data.menu.links} />} */}
       </div>
       <div className="menu">
-        <Link to="/about">About</Link>
+        <Link to="/about" className="mx-4">
+          About
+        </Link>
+        <Link to="/about" className="mx-4">
+          Best Sellers
+        </Link>
+        <Link to="/about" className="mx-4">
+          Collections
+        </Link>
+        <Link to="/about" className="mx-4">
+          Lifestyle
+        </Link>
       </div>
       <CartToggleButton />
     </HeaderScroll>
