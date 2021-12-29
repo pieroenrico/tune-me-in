@@ -25,10 +25,15 @@ const HeroTriplet = (props) => {
   };
 
   return (
-    <div className="3xl:container 3xl:mx-auto">
+    <div className="3xl:container 3xl:mx-auto relative">
+      <div className="w-full h-full absolute z-30 flex items-center justify-center group">
+        <div className="text-[#bf5b47] text-[12em] font-extrabold transition-all opacity-100 group-hover:opacity-0">
+          Tune me in
+        </div>
+      </div>
       <div
         className="w-full bg-cover bg-no-repeat bg-center h-[60vh] min-h-[1000px] flex items-center justify-between overflow-hidden"
-        style={{backgroundImage: `url('${bgImage.url}')`}}
+        style={{backgroundImage: `url('${bgImage.url}?w=1200')`}}
       >
         <div className="w-1/3 h-full flex items-center justify-end">
           <div
@@ -51,7 +56,7 @@ const HeroTriplet = (props) => {
                 <Slide key={idx}>
                   <div
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{backgroundImage: `url('${slide.image.url}')`}}
+                    style={{backgroundImage: `url('${slide.image.url}?w=900')`}}
                   ></div>
                 </Slide>
               ))}
@@ -78,7 +83,9 @@ const HeroTriplet = (props) => {
                 <Slide key={idx}>
                   <div
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{backgroundImage: `url('${slide.image.url}')`}}
+                    style={{
+                      backgroundImage: `url('${slide.image.url}?w=900')`,
+                    }}
                   ></div>
                 </Slide>
               ))}
@@ -106,7 +113,7 @@ const HeroTriplet = (props) => {
                 <Slide key={idx}>
                   <div
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{backgroundImage: `url('${slide.image.url}')`}}
+                    style={{backgroundImage: `url('${slide.image.url}?w=900')`}}
                   ></div>
                 </Slide>
               ))}

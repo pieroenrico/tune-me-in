@@ -8,7 +8,7 @@ const ProductDetailsPlaylist = (props) => {
           className="flex items-start justify-between border-b border-gray-300 pb-2 mb-2"
           key={idx}
         >
-          <div>
+          <div className="song-wrapper">
             <div className="song font-light text-2xl text-dark">
               {song.title}
             </div>
