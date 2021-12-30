@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @font-face {
   font-family: 'Moniqa Black Narrow Heading';
-  src: url('../public/fonts/Moniqa-BlackNarrowHeading.woff2') format('woff2'),
-    url('../public/fonts/Moniqa-BlackNarrowHeading.woff') format('woff');
+  src: url('/fonts/Moniqa-BlackNarrowHeading.woff2') format('woff2'),
+    url('/fonts/Moniqa-BlackNarrowHeading.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -10,8 +10,8 @@
 
 @font-face {
   font-family: 'Moniqa Black Narrow Display';
-  src: url('../public/fonts/Moniqa-BlackNarrowDisplay.woff2') format('woff2'),
-    url('../public/fonts/Moniqa-BlackNarrowDisplay.woff') format('woff');
+  src: url('/fonts/Moniqa-BlackNarrowDisplay.woff2') format('woff2'),
+    url('/fonts/Moniqa-BlackNarrowDisplay.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -19,8 +19,8 @@
 
 @font-face {
   font-family: 'Moniqa Black Narrow Ita Display';
-  src: url('../public/fonts/Moniqa-BlackNarrowItaDisplay.woff2') format('woff2'),
-    url('../public/fonts/Moniqa-BlackNarrowItaDisplay.woff') format('woff');
+  src: url('/fonts/Moniqa-BlackNarrowItaDisplay.woff2') format('woff2'),
+    url('/fonts/Moniqa-BlackNarrowItaDisplay.woff') format('woff');
   font-weight: 900;
   font-style: italic;
   font-display: swap;
@@ -28,8 +28,8 @@
 
 @font-face {
   font-family: 'Moniqa Black Narrow Paragraph';
-  src: url('../public/fonts/Moniqa-BlackNarrowParagraph.woff2') format('woff2'),
-    url('../public/fonts/Moniqa-BlackNarrowParagraph.woff') format('woff');
+  src: url('/fonts/Moniqa-BlackNarrowParagraph.woff2') format('woff2'),
+    url('/fonts/Moniqa-BlackNarrowParagraph.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -37,8 +37,8 @@
 
 @font-face {
   font-family: 'Moniqa Black Narrow Ita Heading';
-  src: url('../public/fonts/Moniqa-BlackNarrowItaHeading.woff2') format('woff2'),
-    url('../public/fonts/Moniqa-BlackNarrowItaHeading.woff') format('woff');
+  src: url('/fonts/Moniqa-BlackNarrowItaHeading.woff2') format('woff2'),
+    url('/fonts/Moniqa-BlackNarrowItaHeading.woff') format('woff');
   font-weight: 900;
   font-style: italic;
   font-display: swap;
@@ -91,6 +91,7 @@ body {
     stylelint-enable 
 } */
 
+/* stylelint-disable */
 .bg-product-black {
   background-color: #191919;
 }
@@ -121,33 +122,34 @@ body {
 .bg-product-white {
   background-color: #fafafa;
 }
+/* stylelint-enable */
 
-header {
+.header {
   @apply bg-transparent flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50;
 }
-header .logo {
+.header .logo {
   @apply w-[100px] h-[45px] flex items-center justify-center relative overflow-hidden transition-all delay-100;
   background-position-x: -100%;
 }
-header .logo-text {
+.header .logo-text {
   @apply text-dark text-2xl font-extrabold absolute -translate-y-full transition-all;
 }
-header .menu {
+.header .menu {
   @apply text-light-b font-semibold uppercase transition-all opacity-0;
 }
-header.always-black,
-header.scrolled {
+.always-black,
+.scrolled {
   @apply bg-light-b border-b border-dark flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50;
 }
-header.always-black .menu,
-header.scrolled .menu {
+.always-black .menu,
+.scrolled .menu {
   @apply text-dark opacity-100;
 }
-header.always-black .logo,
-header.scrolled .logo {
+.always-black .logo,
+.scrolled .logo {
   background-position-x: 0;
 }
-header.always-black .logo-text,
-header.scrolled .logo-text {
+.always-black .logo-text,
+.scrolled .logo-text {
   @apply translate-y-0;
 }

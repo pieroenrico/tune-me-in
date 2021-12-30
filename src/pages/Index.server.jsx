@@ -106,15 +106,36 @@ export default function Index() {
         })}
       />
 
-      <div className="w-full border-t border-dark container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark hidden">
+      <FeaturedCollection
+        title={featuredCollection3.title}
+        products={featuredCollection3.products.map((product) => {
+          return {
+            ...product.productData,
+            storefront: shopifyProducts?.[product?.productData._id],
+          };
+        })}
+      />
+
+      <FeaturedBlog data={blog} />
+
+      <Seo
+        page={{
+          description: sanityPage.seo?.description,
+          image: sanityPage.seo?.image,
+          keywords: sanityPage.seo?.keywords,
+          title: sanityPage.seo?.title,
+        }}
+      />
+
+      {/* <div className="w-full border-t border-dark container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark hidden">
         <div className="w-full flex items-stretch justify-between">
           <div className="py-4 pl-4 pr-2">
             <div className="sticky top-4">
-              {/* <ProductCard mode="small" className="w-[490px]" /> */}
+              <ProductCard mode="small" className="w-[490px]" />
             </div>
           </div>
           <div className="py-4 pl-2 pr-2">
-            {/* <ProductCard mode="small" className="w-[490px]" /> */}
+            <ProductCard mode="small" className="w-[490px]" /> 
           </div>
           <div className="flex-grow py-4 pl-2 pr-4">
             <div className="sticky top-4">
@@ -139,124 +160,11 @@ export default function Index() {
             </div>
           </div>
         </div>
-      </div>
-
-      <FeaturedCollection
-        title={featuredCollection3.title}
-        products={featuredCollection3.products.map((product) => {
-          return {
-            ...product.productData,
-            storefront: shopifyProducts?.[product?.productData._id],
-          };
-        })}
-      />
-
-      <FeaturedBlog data={blog} />
+      </div>*/}
     </Layout>
   );
-  /*
-  return (
-    <ProductsProvider value={shopifyProducts}>
-        <Layout>
-          <div className="bg-black-300 relative w-full">
-
-            {sanityPage?.intro && (
-              <div className="max-w-3xl p-4">
-                <PortableText blocks={sanityPage.intro} />
-              </div>
-            )}
-
-            <div className="bg-black h-px my-10 w-full" />
-
-
-            <div className="px-4">
-              <h2 className="font-medium text-xl">Featured collections</h2>
-              <section
-                className={clsx([
-                  'grid grid-cols-1 sm:grid-cols-2',
-                  'gap-10 my-8',
-                ])}
-              >
-                {sanityPage.featuredCollections?.map((collection) => (
-                  <div key={collection?._id}>
-                    <CollectionCard collection={collection} />
-                  </div>
-                ))}
-              </section>
-            </div>
-
-
-            <div className="bg-black h-px my-10 w-full" />
-
-
-            {sanityPage?.gallery && (
-              <GalleryCarousel gallery={sanityPage?.gallery} />
-            )}
-
-
-            <div className="bg-black h-px my-10 w-full" />
-
-
-            <div className="px-4">
-              <h2 className="font-medium text-xl">Featured products</h2>
-              <ProductListing
-                products={sanityPage?.featuredProducts?.map((product) => ({
-                  ...product,
-                  storefront: shopifyProducts?.[product?._id],
-                }))}
-              />
-            </div>
-          </div>
-
-
-          <Seo
-            page={{
-              description: sanityPage.seo?.description,
-              image: sanityPage.seo?.image,
-              keywords: sanityPage.seo?.keywords,
-              title: sanityPage.seo?.title,
-            }}
-          />
-        </Layout>
-      </ProductsProvider>
-      );*/
 }
-/*
-const QUERY = groq`
-    *[_id == 'home3'][0]{
-        featuredCollections[] -> {
-          _id,
-          image {
-        ${IMAGE}
-      },
-      "slug": slug.current,
-      title,
-    },
-      featuredProducts[] {
-        ...${PRODUCT_WITH_VARIANT}
-    },
-      gallery[] {
-        _key,
-        image {
-        ${IMAGE}
-      },
-      productWithVariant {
-        ${PRODUCT_WITH_VARIANT}
-      },
-      title
-    },
-      intro[] {
-        ${PORTABLE_TEXT}
-    },
-      seo {
-        ${SEO}
-    }
-  } {
-        ...,
-        featuredProducts[available]
-      }
-      `;
-*/
+
 const QUERY = groq`
   *[_id == 'home3'][0] {
     title,

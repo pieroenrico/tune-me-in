@@ -31,8 +31,10 @@ const ProductCardOptions = (props) => {
               <button
                 key={i}
                 onClick={() => onSelectedOption(options.name, value)}
-                className={`option cursor-pointer mr-1 after:pl-1 font-thin ${
-                  selectedOptions[options.name] === value && `font-bold`
+                className={`option cursor-pointer mr-1 after:pl-1  ${
+                  selectedOptions[options.name] === value
+                    ? `font-bold`
+                    : `font-thin`
                 } ${
                   i < options.values.length - 1
                     ? `after:content-['/'] after:font-thin`

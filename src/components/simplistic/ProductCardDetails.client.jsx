@@ -9,7 +9,8 @@ import {useProductMedia} from './providers/ProductMediaProvider.client';
 import LinkProduct from '../LinkProduct.client';
 
 const ProductCardDetails = (props) => {
-  const {className, addToCart, detailsLink, mode, onClick} = props;
+  const {className, addToCart, detailsLink, mode, onClick, selectedColor} =
+    props;
   const {
     id,
     handle,
@@ -19,37 +20,47 @@ const ProductCardDetails = (props) => {
     setSelectedOption,
     selectedVariant,
     mf: metafields,
+    images,
   } = useProduct();
-  const {media} = useProductMedia();
-  const playlist = metafields.edges.length
-    ? JSON.parse(
-        metafields.edges.find((edge) => edge.node.key === 'playlist').node
-          .value,
-      )
-    : null;
+
+  // const {media} = useProductMedia();
+  const playlist =
+    metafields?.edges && metafields.edges.length
+      ? JSON.parse(
+          metafields.edges.find((edge) => edge.node.key === 'playlist').node
+            .value,
+        )
+      : null;
 
   const [selectedImage, setSelectedImage] = useState();
   useEffect(() => {
     if (mode !== 'small') {
-      const selectedImage = media.find(
+      const selectedImage = images.find(
         (m) =>
           m.altText ===
-          `color:${selectedVariant.selectedOptions
+          `color:${selectedVariant?.selectedOptions
             .find((o) => o.name === 'Color')
             .value.toLowerCase()}`,
       );
-      setSelectedImage(selectedImage ? selectedImage : media[0]);
+      setSelectedImage(selectedImage ? selectedImage : images[0]);
     } else {
-      setSelectedImage(media[Math.floor(Math.random() * media.length)]);
+      setSelectedImage(images[Math.floor(Math.random() * images.length)]);
     }
     return () => {
       setSelectedImage(null);
     };
   }, [id, selectedVariant]);
 
-  // console.log('product', shopifyProduct.selectedVariant);
-
-  //console.log('media', media);
+  useEffect(() => {
+    if (selectedColor) {
+      const selectedImage = images.find(
+        (m) => m.altText === `color:${selectedColor.toLowerCase()}`,
+      );
+      setTimeout(() => {
+        setSelectedImage(selectedImage ? selectedImage : images[0]);
+      }, 100);
+    }
+  }, [selectedColor]);
 
   return (
     <div
@@ -58,12 +69,8 @@ const ProductCardDetails = (props) => {
         if (onClick) onClick(e);
       }}
     >
-      <LinkProduct
-        handle={handle}
-        variantId={variantId}
-        className="mt-4 text-center block font-light underline"
-      >
-        <ProductCardImage image={selectedImage?.url} key={id} />
+      <LinkProduct handle={handle} variantId={variantId}>
+        <ProductCardImage image={selectedImage?.url} key={handle} />
       </LinkProduct>
       <div className={`${mode === 'small-interactive' ? `relative` : ''}`}>
         <div className={`flex items-start justify-between mt-4`}>
@@ -134,12 +141,6 @@ const ProductCardDetails = (props) => {
       )}
     </div>
   );
-};
-
-ProductCardDetails.defaultProps = {
-  addToCart: false,
-  detailsLink: false,
-  mode: 'large',
 };
 
 export default ProductCardDetails;

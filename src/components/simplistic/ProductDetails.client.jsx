@@ -2,14 +2,16 @@ import {useProduct} from '@shopify/hydrogen/client';
 import ProductCardOptions from './ProductCardOptions.client';
 import ProductDetailsPlaylist from './ProductDetailsPlaylist.client';
 import ProductDetailsInfo from './ProductDetailsInfo.client';
+import ProductCardPrice from './ProductCardPrice.client';
 import {Product} from '@shopify/hydrogen/client';
 
 const ProductDetails = (props) => {
   const {product} = props;
   const {product: sanityProduct, storefront} = product;
-  const {options, selectedOptions, setSelectedOption} = useProduct();
+  const {options, selectedOptions, setSelectedOption, selectedVariant} =
+    useProduct();
   const {title, images, mf: metafields, descriptionHtml} = storefront;
-  console.log(metafields);
+  //console.log(metafields);
   const playlist =
     metafields.edges.length > 0
       ? JSON.parse(
@@ -17,7 +19,7 @@ const ProductDetails = (props) => {
             .value,
         )
       : [];
-  console.log(storefront);
+  //console.log(storefront);
 
   const handleImageClick = (id) => {
     document
@@ -61,7 +63,9 @@ const ProductDetails = (props) => {
             {title}
           </h1>
 
-          <div className="text-3xl font-bold">$50</div>
+          <div className="text-3xl font-bold">
+            <ProductCardPrice price={selectedVariant?.priceV2.amount} />
+          </div>
 
           <div className="product-options mt-4 mb-8">
             {options.map((option, o) => (
@@ -73,6 +77,12 @@ const ProductDetails = (props) => {
               />
             ))}
           </div>
+
+          <p className="my-8">
+            Lorem ipsum dolor sit amet, officia excepteur ex fugiat
+            reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit
+            ex esse exercitation amet. Nisi anim cupidatat excepteur officia.
+          </p>
           <div className="my-8">
             <Product.SelectedVariant.AddToCartButton
               className={`cursor-pointer mt-4 bg-dark bg-repeat-x text-white uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary`}

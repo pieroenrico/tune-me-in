@@ -66,8 +66,9 @@ const Slider = forwardRef((props, ref) => {
    */
   useEffect(() => {
     return () => {
-      console.log('cleanup');
+      // console.log('cleanup');
       setLoaded(false);
+      clearTimeout(autoplayTimeout);
     };
   }, []);
 
@@ -90,7 +91,7 @@ const Slider = forwardRef((props, ref) => {
           }`}
         >
           <button
-            className="left w-8 h-8"
+            className="left w-12 h-12 bg-light-f border border-dark -ml-4"
             onClick={(e) => {
               if (autoplay) stopAutoplay();
               e.stopPropagation() || propsRef.current?.prev();
@@ -100,7 +101,7 @@ const Slider = forwardRef((props, ref) => {
             <IconArrowLeft />
           </button>
           <button
-            className="right w-8 h-8"
+            className="right w-12 h-12 bg-light-f border border-dark"
             onClick={(e) => {
               if (autoplay) stopAutoplay();
               e.stopPropagation() || propsRef.current?.next();

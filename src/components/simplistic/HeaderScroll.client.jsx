@@ -27,12 +27,14 @@ export default function HeaderScroll({alwaysBlack, children}) {
     return () => {
       document.removeEventListener('scroll', listener);
       listener = null;
-      setScrollState('top');
+      //setScrollState('top');
     };
   }, []);
 
   return (
-    <header className={`${alwaysBlack ? `always-black` : ``} ${scrollState}`}>
+    <header
+      className={`header ${alwaysBlack ? `always-black` : ``} ${scrollState}`}
+    >
       {children}
     </header>
   );

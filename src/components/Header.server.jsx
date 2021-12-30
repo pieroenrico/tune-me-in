@@ -24,13 +24,13 @@ export default function Header(props) {
         <Link to="/about" className="mx-4">
           About
         </Link>
-        <Link to="/about" className="mx-4">
-          Best Sellers
+        <Link to="/collections/all-products" className="mx-4">
+          T-Shirts
         </Link>
-        <Link to="/about" className="mx-4">
+        <Link to="/collections" className="mx-4">
           Collections
         </Link>
-        <Link to="/about" className="mx-4">
+        <Link to="/lifestyle" className="mx-4">
           Lifestyle
         </Link>
       </div>
