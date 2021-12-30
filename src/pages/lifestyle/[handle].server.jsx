@@ -1,19 +1,19 @@
-import Layout from '../components/Layout.server';
-import BlogArticles from '../components/simplistic/BlogArticles.client';
+import Layout from '../../components/Layout.server';
+import BlogArticles from '../../components/simplistic/BlogArticles.client';
 import groq from 'groq';
 import {useSanityQuery} from 'hydrogen-plugin-sanity';
-import {IMAGE} from '../fragments/image';
-import {PORTABLE_TEXT} from '../fragments/portableText';
-import PortableText from '../components/PortableText.client';
-import SectionTitle from '../components/simplistic/SectionTitle.server';
+import {IMAGE} from '../../fragments/image';
+import {PORTABLE_TEXT} from '../../fragments/portableText';
+import PortableText from '../../components/PortableText.client';
+import SectionTitle from '../../components/simplistic/SectionTitle.server';
+import {useParams} from 'react-router-dom';
 export default function Lifestyle({selectedArticle}) {
+  const {handle} = useParams();
   const {sanityData: blogData} = useSanityQuery({
     query: QUERY,
   });
-  console.log(blogData);
-  const selectedSlug = selectedArticle
-    ? selectedArticle
-    : blogData[0].slug.current;
+
+  const selectedSlug = selectedArticle ? selectedArticle : handle;
 
   const currentArticle = blogData.find(
     (article) => article.slug.current === selectedSlug,
@@ -35,12 +35,14 @@ export default function Lifestyle({selectedArticle}) {
           </div>
           <div className="w-1/3 p-4">
             <BlogArticles
-              articles={blogData.map((article) => ({
-                slug: article.slug,
-                title: article.title,
-                image: article.image,
-                extract: article.extract,
-              }))}
+              articles={blogData
+                .filter((article) => article.slug.current !== selectedSlug)
+                .map((article) => ({
+                  slug: article.slug,
+                  title: article.title,
+                  image: article.image,
+                  extract: article.extract,
+                }))}
             />
           </div>
         </div>
@@ -60,4 +62,5 @@ const QUERY = groq`
         ${IMAGE}
     }
 }
+|order(_updatedAt desc)
 `;

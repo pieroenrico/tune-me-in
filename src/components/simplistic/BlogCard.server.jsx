@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 const BlogCardImage = (props) => {
   const {image} = props;
   return (
@@ -17,23 +18,25 @@ const BlogCard = (props) => {
     <div
       className={`product-card border border-secondary p-4 transition-all bg-light-b group hover:bg-light-ff ${className}`}
     >
-      <BlogCardImage image={article.image} />
+      <Link to={`/lifestyle/${article.slug}`}>
+        <BlogCardImage image={article.image} />
 
-      <div>
-        <div className={`flex items-start justify-between mt-4`}>
-          <div>
-            <div
-              className={`product-title font-main-heading text-5xl text-secondary uppercase`}
-            >
-              {article.title}
+        <div>
+          <div className={`flex items-start justify-between mt-4`}>
+            <div>
+              <div
+                className={`product-title font-main-heading text-5xl text-secondary uppercase`}
+              >
+                {article.title}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className={`product-details font-light text-lg`}>
-        {article.extract.substr(0, 120)}...
-      </div>
+        <div className={`product-details font-light text-lg`}>
+          {article.extract.substr(0, 120)}...
+        </div>
+      </Link>
     </div>
   );
 };

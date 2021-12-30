@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "author": "Sanity.io <hello@sanity.io>",
+  "main": "dist/worker/worker.js",
   "scripts": {
     "dev": "vite",
     "lint": "npm-run-all lint:*",
@@ -34,6 +35,7 @@
     "vite": "^2.6.14"
   },
   "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.2.0",
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.5",
     "@sanity/block-content-to-react": "^3.0.0",
