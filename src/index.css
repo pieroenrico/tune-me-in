@@ -125,7 +125,7 @@ body {
 /* stylelint-enable */
 
 .header {
-  @apply bg-transparent flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50;
+  @apply bg-transparent hidden md:flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50;
 }
 .header .logo {
   @apply w-[100px] h-[45px] flex items-center justify-center relative overflow-hidden transition-all delay-100;
@@ -135,8 +135,13 @@ body {
   @apply text-dark text-2xl font-extrabold absolute -translate-y-full transition-all;
 }
 .header .menu {
-  @apply text-light-b font-semibold uppercase transition-all opacity-0;
+  @apply text-gray-400 font-normal uppercase transition-all;
 }
+/* stylelint-disable */
+.header .cart-icon svg path {
+  fill: #777;
+}
+/* stylelint-enable */
 .always-black,
 .scrolled {
   @apply bg-light-b border-b border-dark flex items-center justify-between h-20 p-4 fixed top-0 w-full z-50;
@@ -153,3 +158,30 @@ body {
 .scrolled .logo-text {
   @apply translate-y-0;
 }
+/* stylelint-disable */
+.scrolled .cart-icon svg path {
+  fill: #333;
+}
+
+
+
+.linear-wipe {
+  text-align: center;
+  
+  background: linear-gradient(to right, #333 20%, #8ccbcc 40%, #8ccbcc 60%, #333 80%);
+  background-size: 200% auto;
+  
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  animation: shine 5s linear infinite;
+}
+@keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+/* stylelint-enable */

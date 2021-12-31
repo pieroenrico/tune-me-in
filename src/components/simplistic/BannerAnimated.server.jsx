@@ -9,7 +9,7 @@ const BannerAnimated = (props) => {
       <div className="w-full h-full flex items-center absolute top-0 left-0">
         <div className="relative w-full h-full overflow-hidden">
           <div
-            className="marquee text-[16rem] font-main-display text-white uppercase italic"
+            className="marquee text-[8rem] md:text-[16rem] font-main-display text-white uppercase italic"
             style={{animationDuration: duration}}
           >
             {[...Array(repeat)].map((_, i) => (

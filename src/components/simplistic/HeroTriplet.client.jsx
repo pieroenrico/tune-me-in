@@ -27,15 +27,15 @@ const HeroTriplet = (props) => {
   return (
     <div className="3xl:container 3xl:mx-auto relative">
       <div className="w-full h-full absolute z-30 flex items-center justify-center group">
-        <div className="text-[#bf5b47] text-[28em] font-extrabold transition-all opacity-100 group-hover:opacity-0">
-          TMI
+        <div className="linear-wipe text-[8em] md:text-[14em] font-extrabold transition-all opacity-100 group-hover:opacity-0">
+          Tune Me In
         </div>
       </div>
       <div
         className="w-full bg-cover bg-no-repeat bg-center h-[60vh] min-h-[1000px] flex items-center justify-between overflow-hidden"
         style={{backgroundImage: `url('${bgImage.url}?w=1200')`}}
       >
-        <div className="w-1/3 h-full flex items-center justify-end">
+        <div className="w-1/3 h-full hidden md:flex items-center justify-end">
           <div
             className="w-3/5 translate-x-4 -translate-y-24 z-10"
             style={{height: 400}}
@@ -63,7 +63,7 @@ const HeroTriplet = (props) => {
             </Slider>
           </div>
         </div>
-        <div className="w-1/3 h-full flex items-center">
+        <div className="w-[90%] mx-auto md:w-1/3 h-full flex items-center">
           <div className="w-full" style={{height: 800}}>
             <Slider
               ref={mainSlider}
@@ -92,7 +92,7 @@ const HeroTriplet = (props) => {
             </Slider>
           </div>
         </div>
-        <div className="w-1/3 h-full flex items-center justify-start">
+        <div className="w-1/3 h-full hidden md:flex items-center justify-start">
           <div
             className="w-3/5 -translate-x-4 translate-y-24 z-10"
             style={{height: 400}}

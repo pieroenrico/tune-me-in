@@ -77,4 +77,5 @@ jspm_packages/
 dist
 
 # Mac OS finder cache files
-.DS_Store
+.DS_Store# Layer0 generated build directory
+.layer0
