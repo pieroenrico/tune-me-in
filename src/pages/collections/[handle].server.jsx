@@ -1,15 +1,15 @@
 import groq from 'groq';
 import {useSanityQuery} from 'hydrogen-plugin-sanity';
-import pluralize from 'pluralize';
 import {useParams} from 'react-router-dom';
 
 import Layout from '../../components/Layout.server';
 import NotFound from '../../components/NotFound.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import SectionTitle from '../../components/simplistic/SectionTitle.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import CollectionHeader from '../../components/simplistic/CollectionHeader.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import ProductCard from '../../components/simplistic/ProductCard.client';
-import ProductListing from '../../components/ProductListing.server';
-import Seo from '../../components/Seo.client';
 import {COLLECTION_PAGE} from '../../fragments/collectionPage';
 
 export default function Collection() {
@@ -43,10 +43,10 @@ export default function Collection() {
   return (
     <Layout>
       <div className="w-full mt-24">
-        <SectionTitle title={sanityCollection.title}></SectionTitle>
+        <SectionTitle title={sanityCollection.title} />
         <CollectionHeader image={sanityCollection.image} />
-        <div className="px-4 pb-4 grid grid-cols-3 gap-4">
-          {sanityCollection.products.map((sanityProduct, idx) => (
+        <div className="px-4 pb-4 grid grid-cols-1 md:grid-cols-3 gap-4 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
+          {sanityCollection.products.map((sanityProduct) => (
             <ProductCard
               key={sanityProduct._id}
               product={{

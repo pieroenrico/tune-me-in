@@ -5,6 +5,7 @@ import shopifyConfig from '../shopify.config';
 
 import Main from './components/Main.server';
 import CartProvider from './contexts/CartProvider.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import ResponsiveProvider from './components/simplistic/providers/ResponsiveProvider.client';
 
 export default function App({...serverState}) {

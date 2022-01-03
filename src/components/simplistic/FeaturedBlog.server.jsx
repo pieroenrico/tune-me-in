@@ -1,18 +1,21 @@
 import {Slider, Slide} from './Slider.client';
 import BlogCard from './BlogCard.server';
 import {useResponsive} from './providers/ResponsiveProvider.client';
+import DragBadge from './DragBadge.server';
+
 const FeaturedBlog = (props) => {
   const {data} = props;
   const {title, featuredArticles} = data;
   const {screens} = useResponsive();
   return (
-    <>
+    <div className="dragable-collection">
       <div className="w-full px-4 pt-6 pb-0 border-t border-b border-secondary flex items-center 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
         <h2 className="font-main-display text-7xl md:text-huge uppercase text-secondary">
           {title}
         </h2>
       </div>
-      <div className="py-4 pl-4 3xl:mx-auto 3xl:container 3xl:border-l 3xl:border-r 3xl:border-dark">
+      <div className=" py-4 pl-4 3xl:mx-auto 3xl:container 3xl:border-l 3xl:border-r 3xl:border-dark relative">
+        <DragBadge />
         <Slider
           sliderConfig={{
             slides: {
@@ -28,7 +31,7 @@ const FeaturedBlog = (props) => {
               },
               [screens.lg.mediaQuery]: {
                 slides: {
-                  perView: 3.2,
+                  perView: 2.2,
                 },
               },
             },
@@ -42,7 +45,7 @@ const FeaturedBlog = (props) => {
           ))}
         </Slider>
       </div>
-    </>
+    </div>
   );
 };
 

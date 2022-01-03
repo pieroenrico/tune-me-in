@@ -37,5 +37,8 @@ module.exports = {
     // need to keep them disabled.
     'jsx-a11y/label-has-for': 'off',
     'jsx-a11y/control-has-associated-label': 'off',
+
+    'react/no-array-index-key': 'off',
+    'react-hooks/exhaustive-deps': 'off',
   },
 };

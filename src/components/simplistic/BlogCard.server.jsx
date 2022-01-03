@@ -1,12 +1,13 @@
 import {Link} from 'react-router-dom';
+
 const BlogCardImage = (props) => {
   const {image} = props;
   return (
     <div className="relative bg-grey border border-secondary aspect-w-2 aspect-h-1 overflow-hidden">
       <div
         style={{backgroundImage: `url('${image.url}')`}}
-        className={`product-image w-full h-full bg-cover bg-no-repeat bg-center translate-y-0 transition-all`}
-      ></div>
+        className="product-image w-full h-full bg-cover bg-no-repeat bg-center translate-y-0 transition-all"
+      />
     </div>
   );
 };
@@ -22,18 +23,16 @@ const BlogCard = (props) => {
         <BlogCardImage image={article.image} />
 
         <div>
-          <div className={`flex items-start justify-between mt-4`}>
+          <div className="flex items-start justify-between mt-4">
             <div>
-              <div
-                className={`product-title font-main-heading text-5xl text-secondary uppercase`}
-              >
+              <div className="product-title font-main-heading text-5xl text-secondary uppercase">
                 {article.title}
               </div>
             </div>
           </div>
         </div>
 
-        <div className={`product-details font-light text-lg`}>
+        <div className="product-details font-light text-lg">
           {article.extract.substr(0, 120)}...
         </div>
       </Link>

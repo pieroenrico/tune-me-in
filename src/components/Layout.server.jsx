@@ -1,4 +1,5 @@
 import {LocalizationProvider} from '@shopify/hydrogen';
+
 import HeaderScroll from './simplistic/HeaderScroll.client';
 import Footer from './Footer.server';
 import Cart from './Cart.client';

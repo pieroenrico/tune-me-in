@@ -1,10 +1,11 @@
-import {useState, useRef} from 'react';
+import {useRef} from 'react';
+
 import {Slider, Slide} from './Slider.client';
 
 const HeroTriplet = (props) => {
   const {data} = props;
-  const {title, bgImage, carousel} = data;
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const {bgImage, carousel} = data;
+  // const [currentSlide, setCurrentSlide] = useState(0);
   const mainSlider = useRef();
   const secondSlider = useRef();
   const thirdSlider = useRef();
@@ -13,13 +14,13 @@ const HeroTriplet = (props) => {
     if (secondSlider && secondSlider.current) {
       const nextSlide = slide + 1 === carousel.length ? 0 : slide + 1;
       setTimeout(() => {
-        secondSlider?.current.goToSlide(nextSlide);
+        secondSlider?.current?.goToSlide(nextSlide);
       }, 200);
     }
     if (thirdSlider && thirdSlider.current) {
       const nextSlide = slide + 2 === carousel.length ? 0 : slide + 2;
       setTimeout(() => {
-        thirdSlider?.current.goToSlide(nextSlide);
+        thirdSlider?.current?.goToSlide(nextSlide);
       }, 400);
     }
   };
@@ -27,12 +28,12 @@ const HeroTriplet = (props) => {
   return (
     <div className="3xl:container 3xl:mx-auto relative">
       <div className="w-full h-full absolute z-30 flex items-center justify-center group">
-        <div className="linear-wipe text-[8em] md:text-[14em] font-extrabold transition-all opacity-100 group-hover:opacity-0">
+        <div className="linear-wipe leading-[.75em] text-[8em] md:text-[14em] font-extrabold transition-all opacity-100 group-hover:opacity-0">
           Tune Me In
         </div>
       </div>
       <div
-        className="w-full bg-cover bg-no-repeat bg-center h-[60vh] min-h-[1000px] flex items-center justify-between overflow-hidden"
+        className="w-full bg-cover bg-no-repeat bg-center h-screen md:h-[60vh] md:min-h-[1000px] flex items-center justify-between overflow-hidden"
         style={{backgroundImage: `url('${bgImage.url}?w=1200')`}}
       >
         <div className="w-1/3 h-full hidden md:flex items-center justify-end">
@@ -57,7 +58,7 @@ const HeroTriplet = (props) => {
                   <div
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
                     style={{backgroundImage: `url('${slide.image.url}?w=900')`}}
-                  ></div>
+                  />
                 </Slide>
               ))}
             </Slider>
@@ -86,7 +87,7 @@ const HeroTriplet = (props) => {
                     style={{
                       backgroundImage: `url('${slide.image.url}?w=900')`,
                     }}
-                  ></div>
+                  />
                 </Slide>
               ))}
             </Slider>
@@ -114,7 +115,7 @@ const HeroTriplet = (props) => {
                   <div
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
                     style={{backgroundImage: `url('${slide.image.url}?w=900')`}}
-                  ></div>
+                  />
                 </Slide>
               ))}
             </Slider>

@@ -4,10 +4,10 @@ const FeaturedCollectionsList = (props) => {
     <ul>
       {collections.map((collection, idx) => (
         <li key={idx}>
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
+          <button
+            type="button"
+            onClick={(event) => {
+              event.preventDefault();
               setSelectedCollection(collection.handle);
             }}
             style={
@@ -25,7 +25,7 @@ const FeaturedCollectionsList = (props) => {
             }`}
           >
             {collection.title}
-          </a>
+          </button>
         </li>
       ))}
     </ul>

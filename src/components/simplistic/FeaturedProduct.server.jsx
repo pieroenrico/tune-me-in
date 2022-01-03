@@ -1,4 +1,4 @@
-const FeaturedProduct = (props) => {
+const FeaturedProduct = () => {
   return (
     <div className="w-full border-t border-dark 3xl:container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
       <div className="w-full flex flex-col-reverse md:flex-row items-stretch justify-between">
@@ -26,7 +26,7 @@ const FeaturedProduct = (props) => {
           <div
             className="border border-dark bg-grey aspect-w-3 aspect-h-2 bg-center bg-cover"
             style={{backgroundImage: `url('/img/headphones.jpg')`}}
-          ></div>
+          />
         </div>
       </div>
     </div>

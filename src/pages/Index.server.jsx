@@ -1,31 +1,24 @@
-import clsx from 'clsx';
 import groq from 'groq';
-import gql from 'graphql-tag';
 import {useSanityQuery} from 'hydrogen-plugin-sanity';
 import React from 'react';
 
-import CollectionCard from '../components/CollectionCard.client';
-import GalleryCarousel from '../components/GalleryCarousel.client';
 import Layout from '../components/Layout.server';
 import NotFound from '../components/NotFound.server';
-import PortableText from '../components/PortableText.client';
-import ProductListing from '../components/ProductListing.server';
 import Seo from '../components/Seo.client';
-import ProductsProvider from '../contexts/ProductsProvider.client';
 import {IMAGE} from '../fragments/image';
-import {PORTABLE_TEXT} from '../fragments/portableText';
 import {PRODUCT_WITH_VARIANT} from '../fragments/productWithVariant';
-import {SEO} from '../fragments/seo';
-
-import {Slider, Slide} from '../components/simplistic/Slider.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import BannerAnimated from '../components/simplistic/BannerAnimated.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import HeroTriplet from '../components/simplistic/HeroTriplet.client';
-import BlogCard from '../components/simplistic/BlogCard.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import FeaturedCollection from '../components/simplistic/FeaturedCollection.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import FeaturedCollections from '../components/simplistic/FeaturedCollections.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import SponsoredArticle from '../components/simplistic/SponsoredArticle.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import FeaturedBlog from '../components/simplistic/FeaturedBlog.server';
-import {ProductProviderFragment} from '@shopify/hydrogen/dist/esnext/graphql/graphql-constants';
 
 export default function Index() {
   const {sanityData: sanityPage, shopifyProducts} = useSanityQuery({

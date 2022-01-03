@@ -1,6 +1,8 @@
+import {useRef, useState, useEffect} from 'react';
+
 import ProductDetailsPlaylist from './ProductDetailsPlaylist.client';
 import {Slider, Slide} from './Slider.client';
-import {useRef, useState, useEffect} from 'react';
+
 const ProductDetailsInfo = (props) => {
   const {tabs} = props;
   const tabsContent = useRef();
@@ -21,11 +23,12 @@ const ProductDetailsInfo = (props) => {
         {tabs.map((tab, idx) => (
           <div className="mr-6" key={idx}>
             <button
+              type="button"
               className={`uppercase font-xs font-semibold text-dark ${
                 currentTab === idx ? 'opacity-100' : 'opacity-50'
               }`}
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={(event) => {
+                event.preventDefault();
                 handleTabClick(idx);
               }}
             >
@@ -59,7 +62,7 @@ const ProductDetailsInfo = (props) => {
                       '<strong class="font-semibold text-normal mt-3 leading-6 block">',
                     ),
                   }}
-                ></div>
+                />
               )}
             </div>
           </Slide>

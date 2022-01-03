@@ -1,4 +1,5 @@
 import Spotify from '../icons/Spotify.client';
+
 const ProductDetailsPlaylist = (props) => {
   const {playlist} = props;
   return (

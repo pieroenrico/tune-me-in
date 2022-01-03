@@ -1,3 +1,4 @@
+import DragBadge from './DragBadge.server';
 import SectionTitle from './SectionTitle.server';
 import ProductCard from './ProductCard.client';
 import {Slider, Slide} from './Slider.client';
@@ -7,10 +8,12 @@ const FeaturedCollection = (props) => {
   const {title, products} = props;
   const {screens} = useResponsive();
   // console.log('fep', products);
+
   return (
-    <>
+    <div className="dragable-collection">
       <SectionTitle title={title} />
-      <div className="py-4 pl-4 w-full 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark cursor-custom-drag">
+      <div className="py-4 pl-4 w-full 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark relative">
+        <DragBadge />
         <Slider
           sliderConfig={{
             slides: {
@@ -33,7 +36,7 @@ const FeaturedCollection = (props) => {
             },
           }}
         >
-          {products.map((product, idx) => (
+          {products.map((product) => (
             <Slide key={product._id}>
               <ProductCard
                 key={product._id}
@@ -47,7 +50,7 @@ const FeaturedCollection = (props) => {
           ))}
         </Slider>
       </div>
-    </>
+    </div>
   );
 };
 

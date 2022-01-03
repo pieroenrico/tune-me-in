@@ -1,12 +1,16 @@
-import Layout from '../../components/Layout.server';
-import BlogArticles from '../../components/simplistic/BlogArticles.client';
 import groq from 'groq';
 import {useSanityQuery} from 'hydrogen-plugin-sanity';
+import {useParams} from 'react-router-dom';
+
+import Layout from '../../components/Layout.server';
 import {IMAGE} from '../../fragments/image';
 import {PORTABLE_TEXT} from '../../fragments/portableText';
 import PortableText from '../../components/PortableText.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
+import BlogArticles from '../../components/simplistic/BlogArticles.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import SectionTitle from '../../components/simplistic/SectionTitle.server';
-import {useParams} from 'react-router-dom';
+
 export default function Lifestyle({selectedArticle}) {
   const {handle} = useParams();
   const {sanityData: blogData} = useSanityQuery({
@@ -23,17 +27,17 @@ export default function Lifestyle({selectedArticle}) {
     <Layout>
       <div className="mt-20 pt-4">
         <SectionTitle title={currentArticle.title} />
-        <div className="flex items-stretch justify-between">
-          <div className="w-2/3 p-4 border-r border-dark">
+        <div className="flex items-stretch justify-between flex-col md:flex-row 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
+          <div className="w-full md:w-2/3 p-4 border-r border-dark">
             <div className="sticky top-24">
               <div
-                className="w-full h-[600px] bg-grey border border-dark mb-4 bg-center bg-cover bg-no-repeat"
+                className="w-full aspect-w-5 aspect-h-4 md:aspect-h-3 bg-grey border border-dark mb-4 bg-center bg-cover bg-no-repeat"
                 style={{backgroundImage: `url('${currentArticle.image.url}')`}}
-              ></div>
+              />
               <PortableText blocks={currentArticle.body} />
             </div>
           </div>
-          <div className="w-1/3 p-4">
+          <div className="w-full md:w-1/3 p-4">
             <BlogArticles
               articles={blogData
                 .filter((article) => article.slug.current !== selectedSlug)

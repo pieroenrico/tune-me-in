@@ -1,25 +1,19 @@
 import groq from 'groq';
 import {useSanityQuery} from 'hydrogen-plugin-sanity';
-import pluralize from 'pluralize';
-import {useParams} from 'react-router-dom';
 
 import Layout from '../../components/Layout.server';
 import NotFound from '../../components/NotFound.server';
-import ProductListing from '../../components/ProductListing.server';
-import Seo from '../../components/Seo.client';
-import {COLLECTION_PAGE} from '../../fragments/collectionPage';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import CollectionFilters from '../../components/simplistic/CollectionFilters.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import SectionTitle from '../../components/simplistic/SectionTitle.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import ProductCard from '../../components/simplistic/ProductCard.client';
 
 export default function Collection({color, size}) {
   const colorFilter = color === undefined ? null : color;
   const sizeFilter = size === undefined ? null : size;
-  const {
-    sanityData: sanityCollection,
-    shopifyProducts,
-    errors,
-  } = useSanityQuery({
+  const {sanityData: sanityCollection, shopifyProducts} = useSanityQuery({
     query: QUERY,
     params: {
       storeTag: 'tune-me-in',
@@ -54,9 +48,9 @@ export default function Collection({color, size}) {
   return (
     <Layout>
       <div className="mt-20 pt-4">
-        <SectionTitle title="All T-Shirts"></SectionTitle>
-        <div className="w-full flex items-stretch justify-between">
-          <div className="w-[20%] p-4">
+        <SectionTitle title="All T-Shirts" />
+        <div className="w-full flex items-stretch justify-between flex-col md:flex-row 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
+          <div className="w-full md:w-[20%] p-4">
             {filters && (
               <div className="border border-dark sticky top-24">
                 <CollectionFilters
@@ -68,9 +62,9 @@ export default function Collection({color, size}) {
               </div>
             )}
           </div>
-          <div className="w-[80%]">
-            <div className="w-full grid grid-cols-3 gap-4 py-4 pr-4">
-              {sanityCollection.map((sanityProduct, idx) => (
+          <div className="w-full md:w-[80%]">
+            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 py-4 pr-4 pl-4 md:pl-0">
+              {sanityCollection.map((sanityProduct) => (
                 <ProductCard
                   key={sanityProduct._id}
                   product={{
@@ -123,7 +117,7 @@ const parseFilters = (products) => {
   products.forEach((product) => {
     product.store.options.forEach((option) => {
       filterKeys = filterKeys
-        .filter((f) => f.id !== option._key)
+        .filter((filterKey) => filterKey.id !== option._key)
         .concat([
           {
             id: option._key,
@@ -134,11 +128,13 @@ const parseFilters = (products) => {
   });
   products.forEach((product) => {
     product.store.options.forEach((option) => {
-      let filterKey = filterKeys.find((f) => f.id === option._key);
+      const filterKey = filterKeys.find((fKey) => fKey.id === option._key);
       filterKey.values = filterKey.values.concat(
-        option.values.map((v) => (filterKey.values.includes(v) ? null : v)),
+        option.values.map((value) =>
+          filterKey.values.includes(value) ? null : value,
+        ),
       );
-      filterKey.values = filterKey.values.filter((v) => v);
+      filterKey.values = filterKey.values.filter((value) => value);
     });
   });
   return filterKeys;

@@ -1,5 +1,6 @@
 import {useState, forwardRef, useImperativeHandle, useEffect} from 'react';
 import {useKeenSlider} from 'keen-slider/react';
+
 import IconArrowRight from '../icons/IconArrowRight.client';
 import IconArrowLeft from '../icons/IconArrowLeft.client';
 import 'keen-slider/keen-slider.min.css';
@@ -47,13 +48,14 @@ const Slider = forwardRef((props, ref) => {
   const [autoplayTimeout, setAutoplayTimeout] = useState();
   const [nextTick, setNextTick] = useState(0);
   const [ticking, setTicking] = useState(autoplay);
+  // eslint-disable-next-line @shopify/prefer-early-return
   useEffect(() => {
     if (loaded && ticking) {
-      const autoplayTimeout = setTimeout(() => {
+      const autoplayTimeoutInternal = setTimeout(() => {
         propsRef?.current?.next();
         setNextTick(nextTick + 1);
       }, autoplayInterval);
-      setAutoplayTimeout(autoplayTimeout);
+      setAutoplayTimeout(autoplayTimeoutInternal);
     }
   }, [loaded, nextTick, ticking]);
   const stopAutoplay = () => {
@@ -91,22 +93,28 @@ const Slider = forwardRef((props, ref) => {
           }`}
         >
           <button
+            type="button"
             className="left w-12 h-12 bg-light-f border border-dark -ml-4"
-            onClick={(e) => {
+            onClick={(event) => {
               if (autoplay) stopAutoplay();
-              e.stopPropagation() || propsRef.current?.prev();
+              // eslint-disable-next-line babel/no-unused-expressions
+              event.stopPropagation() || propsRef.current?.prev();
             }}
+            // eslint-disable-next-line no-constant-condition
             disabled={true ? false : currentSlide === 0}
           >
             <IconArrowLeft />
           </button>
           <button
-            className="right w-12 h-12 bg-light-f border border-dark"
-            onClick={(e) => {
+            type="button"
+            className="right w-12 h-12 bg-light-f border border-dark -mr-4"
+            onClick={(event) => {
               if (autoplay) stopAutoplay();
-              e.stopPropagation() || propsRef.current?.next();
+              // eslint-disable-next-line babel/no-unused-expressions
+              event.stopPropagation() || propsRef.current?.next();
             }}
             disabled={
+              // eslint-disable-next-line no-constant-condition
               true
                 ? false
                 : currentSlide ===
@@ -128,7 +136,7 @@ const Slide = (props) => {
     </div>
   );
 };
-
+Slider.displayName = 'Slider';
 Slider.defaultProps = {
   arrows: false,
   showArrowsOnHover: false,

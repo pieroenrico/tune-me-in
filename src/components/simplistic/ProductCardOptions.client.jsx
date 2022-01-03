@@ -11,6 +11,7 @@ const ProductCardOptions = (props) => {
             {options.values.map((value, i) => {
               return (
                 <button
+                  type="button"
                   key={i}
                   onClick={() => onSelectedOption(options.name, value)}
                   className={`option mr-2 rounded-full w-6 h-6 cursor-pointer border ${
@@ -18,7 +19,7 @@ const ProductCardOptions = (props) => {
                       ? `border-dark`
                       : `border-gray`
                   } bg-product-${value.toLowerCase()}`}
-                ></button>
+                />
               );
             })}
           </div>
@@ -29,6 +30,7 @@ const ProductCardOptions = (props) => {
           <div className="options flex items-center font-thin">
             {options.values.map((value, i) => (
               <button
+                type="button"
                 key={i}
                 onClick={() => onSelectedOption(options.name, value)}
                 className={`option cursor-pointer mr-1 after:pl-1  ${

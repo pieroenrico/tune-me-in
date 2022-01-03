@@ -2,17 +2,20 @@ import {flattenConnection} from '@shopify/hydrogen';
 import groq from 'groq';
 import {useSanityQuery} from 'hydrogen-plugin-sanity';
 import {useParams} from 'react-router-dom';
+import {ProductProvider} from '@shopify/hydrogen/client';
+
 import Layout from '../../components/Layout.server';
 import NotFound from '../../components/NotFound.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import ProductDetails from '../../components/simplistic/ProductDetails.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import FeaturedCollection from '../../components/simplistic/FeaturedCollection.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import BlogRelatedArticleCard from '../../components/simplistic/BlogRelatedArticleCard.server';
-import {ProductProvider} from '@shopify/hydrogen/client';
-import Seo from '../../components/Seo.client';
 import ProductsProvider from '../../contexts/ProductsProvider.client';
 import {PRODUCT_PAGE} from '../../fragments/productPage';
 import {encode} from '../../utils/shopifyGid';
-import SectionTitle from '../../components/simplistic/SectionTitle.server';
+
 export default function Product(props) {
   const {handle} = useParams();
   const {sanityData: sanityProduct, shopifyProducts} = useSanityQuery({
@@ -57,6 +60,7 @@ export default function Product(props) {
   };
 
   // Obtain variant ID from server state or request search params, in that order
+  // eslint-disable-next-line node/no-unsupported-features/node-builtins
   const params = new URLSearchParams(props.search);
   const variantId = props?.variantId || params?.get('variant');
   const encodedVariantId = encode('ProductVariant', variantId);
@@ -86,10 +90,10 @@ export default function Product(props) {
         {relatedCollection && (
           <FeaturedCollection
             title={relatedCollection.title}
-            products={relatedCollection.products.map((product) => {
+            products={relatedCollection.products.map((prod) => {
               return {
-                ...product.productData,
-                storefront: shopifyProducts?.[product?.productData._id],
+                ...prod.productData,
+                storefront: shopifyProducts?.[prod?.productData._id],
               };
             })}
           />
@@ -99,33 +103,6 @@ export default function Product(props) {
       </Layout>
     </ProductsProvider>
   );
-
-  // return (
-  //   <ProductsProvider value={shopifyProducts}>
-  //     <Layout>
-  //       <ProductDetails
-  //         initialVariantId={productVariant?.node?.id}
-  //         product={product}
-  //       />
-  //       {/* SEO */}
-  //       <Seo
-  //         page={{
-  //           description: sanityProduct.seo?.description,
-  //           image: sanityProduct.seo?.image,
-  //           keywords: sanityProduct.seo?.keywords,
-  //           product: {
-  //             availableForSale: productVariant?.node?.availableForSale,
-  //             description: sanityProduct.seo?.description,
-  //             price: productVariant?.node?.priceV2,
-  //             title: sanityProduct.seo?.title || sanityProduct?.store?.title,
-  //           },
-  //           title: sanityProduct.seo?.title || sanityProduct?.store?.title,
-  //           type: 'product',
-  //         }}
-  //       />
-  //     </Layout>
-  //   </ProductsProvider>
-  // );
 }
 
 const QUERY = groq`

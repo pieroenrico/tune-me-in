@@ -17,7 +17,7 @@ const SponsoredArticle = (props) => {
           <div
             className="border border-dark bg-grey aspect-w-3 aspect-h-2 bg-center bg-cover"
             style={{backgroundImage: `url('${image.url}')`}}
-          ></div>
+          />
         </div>
       </div>
     </div>

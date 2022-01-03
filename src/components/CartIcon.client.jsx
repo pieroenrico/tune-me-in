@@ -1,4 +1,5 @@
 import {useCartLinesTotalQuantity} from '@shopify/hydrogen/client';
+
 import IconBag from './icons/IconBag.client';
 
 export default function CartIcon() {

@@ -1,12 +1,11 @@
 import {useEffect, useState} from 'react';
-import {Product} from '@shopify/hydrogen/client';
-import {useProduct} from '@shopify/hydrogen/client';
-import {encode} from '../../utils/shopifyGid';
+import {Product, useProduct, useCart} from '@shopify/hydrogen/client';
+
+import LinkProduct from '../LinkProduct.client';
+
 import ProductCardImage from './ProductCardImage.client';
 import ProductCardOptions from './ProductCardOptions.client';
 import ProductCardPrice from './ProductCardPrice.client';
-import {useProductMedia} from './providers/ProductMediaProvider.client';
-import LinkProduct from '../LinkProduct.client';
 
 const ProductCardDetails = (props) => {
   const {className, addToCart, detailsLink, mode, onClick, selectedColor} =
@@ -22,7 +21,7 @@ const ProductCardDetails = (props) => {
     mf: metafields,
     images,
   } = useProduct();
-
+  const {status} = useCart();
   // const {media} = useProductMedia();
   const playlist =
     metafields?.edges && metafields.edges.length
@@ -34,15 +33,18 @@ const ProductCardDetails = (props) => {
 
   const [selectedImage, setSelectedImage] = useState();
   useEffect(() => {
+    // eslint-disable-next-line no-negated-condition
     if (mode !== 'small') {
-      const selectedImage = images.find(
-        (m) =>
-          m.altText ===
+      const selectedImageInternal = images.find(
+        (media) =>
+          media.altText ===
           `color:${selectedVariant?.selectedOptions
-            .find((o) => o.name === 'Color')
+            .find((option) => option.name === 'Color')
             .value.toLowerCase()}`,
       );
-      setSelectedImage(selectedImage ? selectedImage : images[0]);
+      setSelectedImage(
+        selectedImageInternal ? selectedImageInternal : images[0],
+      );
     } else {
       setSelectedImage(images[Math.floor(Math.random() * images.length)]);
     }
@@ -51,13 +53,14 @@ const ProductCardDetails = (props) => {
     };
   }, [id, selectedVariant]);
 
+  // eslint-disable-next-line @shopify/prefer-early-return
   useEffect(() => {
     if (selectedColor) {
-      const selectedImage = images.find(
-        (m) => m.altText === `color:${selectedColor.toLowerCase()}`,
+      const selectedImage2 = images.find(
+        (media) => media.altText === `color:${selectedColor.toLowerCase()}`,
       );
       setTimeout(() => {
-        setSelectedImage(selectedImage ? selectedImage : images[0]);
+        setSelectedImage(selectedImage2 ? selectedImage2 : images[0]);
       }, 100);
     }
   }, [selectedColor]);
@@ -65,15 +68,15 @@ const ProductCardDetails = (props) => {
   return (
     <div
       className={`product-card border border-dark p-4 transition-all bg-light-b group hover:bg-light-ff ${className}`}
-      onClick={(e) => {
-        if (onClick) onClick(e);
+      onClick={(event) => {
+        if (onClick) onClick(event);
       }}
     >
       <LinkProduct handle={handle} variantId={variantId}>
         <ProductCardImage image={selectedImage?.url} key={handle} />
       </LinkProduct>
       <div className={`${mode === 'small-interactive' ? `relative` : ''}`}>
-        <div className={`flex items-start justify-between mt-4`}>
+        <div className="flex items-start justify-between mt-4">
           <div
             className={`${mode === 'small-interactive' ? `mb-6 relative` : ''}`}
           >
@@ -89,6 +92,7 @@ const ProductCardDetails = (props) => {
             {mode !== 'small' && (
               <div
                 className={`flex items-start justify-between mb-4 w-full ${
+                  // eslint-disable-next-line no-nested-ternary
                   mode === 'small-interactive'
                     ? `absolute top-0 opacity-0 transition-all group-hover:opacity-100`
                     : mode === 'large'
@@ -97,12 +101,12 @@ const ProductCardDetails = (props) => {
                 }`}
               >
                 <div className="product-options mb-4">
-                  {options.map((option, o) => (
+                  {options.map((option, odx) => (
                     <ProductCardOptions
                       options={option}
                       selectedOptions={selectedOptions}
                       onSelectedOption={setSelectedOption}
-                      key={o}
+                      key={odx}
                     />
                   ))}
                 </div>
@@ -118,16 +122,20 @@ const ProductCardDetails = (props) => {
             mode === 'large' ? `text-lg` : `truncate`
           }`}
         >
-          {playlist.map((song, s) => (
-            <span key={s}>{song.author} / </span>
+          {playlist.map((song, sdx) => (
+            <span key={sdx}>{song.author} / </span>
           ))}
         </div>
       )}
       {addToCart && (
         <Product.SelectedVariant.AddToCartButton
-          className={`cursor-pointer mt-4 bg-dark bg-repeat-x text-white uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary`}
+          className={`cursor-pointer mt-4  bg-repeat-x ${
+            status === 'updating'
+              ? `text-gray-500 bg-grey`
+              : `text-white bg-dark`
+          } uppercase w-full pt-3 pb-2 font-main-heading text-3xl transition-all hover:bg-primary`}
         >
-          Add To Cart
+          {status === 'updating' ? 'Adding...' : 'Add to Cart'}
         </Product.SelectedVariant.AddToCartButton>
       )}
       {detailsLink && (

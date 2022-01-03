@@ -15,6 +15,7 @@ import {decode} from '../utils/shopifyGid';
 
 import CartIcon from './CartIcon.client';
 import LinkProduct from './LinkProduct.client';
+import IconClose from './icons/IconClose.client';
 
 export default function Cart() {
   const itemCount = useCartLinesTotalQuantity();
@@ -42,15 +43,18 @@ export default function Cart() {
         <div className="overflow-hidden h-full pointer-events-auto">
           <div className="flex flex-col h-full">
             {/* Header */}
-            <header className="bg-white p-4 h-20 border-b border-black flex flex-shrink-0 items-start justify-between">
+            <header className="bg-light-f p-4 h-20 border-b border-black flex flex-shrink-0 items-center justify-between">
               <CartIcon />
-              <span className="cursor-pointer font-medium" onClick={toggleCart}>
-                Close
+              <span
+                className="cursor-pointer font-medium w-6 h-6"
+                onClick={toggleCart}
+              >
+                <IconClose color="#333" />
               </span>
             </header>
 
             {/* Line items */}
-            <div className="bg-white flex-grow px-4 overflow-y-auto">
+            <div className="bg-light-f flex-grow px-4 overflow-y-auto">
               {itemCount > 0 ? (
                 <CartLineItems closeCart={closeCart} />
               ) : (
@@ -72,7 +76,7 @@ export default function Cart() {
             <footer
               className={`${
                 itemCount > 0 ? 'border-t border-solid border-gray-300' : ''
-              } bg-white p-4 space-y-4 flex-shrink-0`}
+              } bg-light-f p-4 space-y-4 flex-shrink-0`}
             >
               {itemCount > 0 ? <CartFooter /> : null}
             </footer>
@@ -109,7 +113,7 @@ function CartLineItems(props) {
                       onClick={closeCart}
                       variantId={variant?.id}
                     >
-                      <CartLine.Image className="bg-white w-full h-full object-contain" />
+                      <CartLine.Image className="bg-grey w-full h-full object-contain border border-dark" />
                     </LinkProduct>
                   </div>
                 </div>
@@ -124,7 +128,7 @@ function CartLineItems(props) {
                         onClick={closeCart}
                         variantId={variant?.id}
                       >
-                        <CartLine.ProductTitle className="text-gray-900 text-sm font-medium" />
+                        <CartLine.ProductTitle className="text-dark uppercase text-3xl font-main-heading" />
                       </LinkProduct>
                       <CartLine.SelectedOptions className="text-sm">
                         {({name, value}) => (
@@ -152,7 +156,7 @@ function CartLineItems(props) {
                   </div>
                   <div className="flex items-center mt-2">
                     <div className="flex-grow">
-                      <div className="border border-gray-300 inline-flex items-center text-gray-500">
+                      <div className="border border-gray-300 inline-flex items-center text-gray-500 bg-light-ff">
                         <CartLine.QuantityAdjustButton
                           adjust="decrease"
                           className="p-2 text-gray-400"
@@ -174,7 +178,10 @@ function CartLineItems(props) {
                       </div>
                     </div>
 
-                    <CartLine.Price className="text-sm" role="cell" />
+                    <CartLine.Price
+                      className="text-sm font-semibold"
+                      role="cell"
+                    />
                   </div>
                 </div>
               </div>
@@ -229,7 +236,7 @@ function CartFooter() {
         />
         */}
 
-        <CartCheckoutButton className="block w-full text-white text-sm bg-black px-3 py-4 disabled:cursor-wait disabled:opacity-60">
+        <CartCheckoutButton className="block w-full text-white text-3xl uppercase font-main-heading bg-black px-3 pt-2 pb-1 transition-all disabled:cursor-wait disabled:opacity-60 hover:bg-primary">
           Checkout
         </CartCheckoutButton>
       </div>

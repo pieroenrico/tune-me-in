@@ -1,11 +1,13 @@
 import {useState, useEffect} from 'react';
 import {useServerState} from '@shopify/hydrogen/client';
+
 const CollectionFilters = (props) => {
   const {filters, allFilters, size, color} = props;
 
   const [showAllFilters] = useState(allFilters);
   const [allFilterKeys, setFilterKeys] = useState();
 
+  // eslint-disable-next-line @shopify/prefer-early-return
   useEffect(() => {
     if (!showAllFilters) {
       console.log('running filters');
@@ -25,9 +27,10 @@ const CollectionFilters = (props) => {
               </h3>
               {color && (
                 <button
+                  type="button"
                   className="text-xs text-dark"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(event) => {
+                    event.preventDefault();
                     setServerState(filterKey.id.toLowerCase(), null);
                   }}
                 >
@@ -38,15 +41,16 @@ const CollectionFilters = (props) => {
             <div className="flex flex-wrap px-4 pt-4 pb-2">
               {filterKey.values.map((value, vdx) => (
                 <button
+                  type="button"
                   key={vdx}
                   className={`mr-2 mb-2 w-6 h-6 flex items-center justify-center border border-dark ${
                     color === value ? `opacity-100` : `opacity-50`
                   } leading-[100%] bg-product-${value.toLowerCase()}`}
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(event) => {
+                    event.preventDefault();
                     setServerState(filterKey.id.toLowerCase(), value);
                   }}
-                ></button>
+                />
               ))}
             </div>
           </div>
@@ -58,9 +62,10 @@ const CollectionFilters = (props) => {
               </h3>
               {size && (
                 <button
+                  type="button"
                   className="text-xs text-dark"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(event) => {
+                    event.preventDefault();
                     setServerState(filterKey.id.toLowerCase(), null);
                   }}
                 >
@@ -71,12 +76,13 @@ const CollectionFilters = (props) => {
             <div className="flex flex-wrap px-4 pt-4 pb-2">
               {filterKey.values.map((value, vdx) => (
                 <button
+                  type="button"
                   key={vdx}
                   className={`mr-2 mb-2 p-1 flex items-center justify-center border border-dark ${
                     size === value ? `opacity-100` : `opacity-50`
                   } leading-[100%]`}
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(event) => {
+                    event.preventDefault();
                     setServerState(filterKey.id.toLowerCase(), value);
                   }}
                 >
