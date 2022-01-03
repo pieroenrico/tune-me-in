@@ -2,7 +2,9 @@ import groq from 'groq';
 import {useSanityQuery} from 'hydrogen-plugin-sanity';
 
 import {IMAGE} from '../fragments/image';
+import {SEO} from '../fragments/seo';
 import Layout from '../components/Layout.server';
+import Seo from '../components/Seo.client';
 
 export default function About() {
   const {sanityData: sanityPage} = useSanityQuery({
@@ -50,6 +52,14 @@ export default function About() {
           style={{backgroundImage: `url('${image5.url}?w=1200')`}}
         />
       </div>
+      <Seo
+        page={{
+          description: sanityPage.seo?.description,
+          image: sanityPage.seo?.image,
+          keywords: sanityPage.seo?.keywords,
+          title: sanityPage.seo?.title,
+        }}
+      />
     </Layout>
   );
 }
@@ -74,6 +84,9 @@ const QUERY = groq`
   },
   image5 {
       ${IMAGE}
+  },
+  seo {
+    ${SEO}
   }
 }
 `;

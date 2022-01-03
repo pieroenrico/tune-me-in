@@ -10,6 +10,7 @@ import SectionTitle from '../../components/simplistic/SectionTitle.server';
 import CollectionHeader from '../../components/simplistic/CollectionHeader.server';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import ProductCard from '../../components/simplistic/ProductCard.client';
+import Seo from '../../components/Seo.client';
 import {COLLECTION_PAGE} from '../../fragments/collectionPage';
 
 export default function Collection() {
@@ -60,6 +61,14 @@ export default function Collection() {
           ))}
         </div>
       </div>
+      <Seo
+        page={{
+          description: '',
+          image: null,
+          keywords: [],
+          title: `TMI | ${sanityCollection.title}`,
+        }}
+      />
     </Layout>
   );
 

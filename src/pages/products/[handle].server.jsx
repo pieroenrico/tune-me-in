@@ -14,6 +14,7 @@ import FeaturedCollection from '../../components/simplistic/FeaturedCollection.s
 import BlogRelatedArticleCard from '../../components/simplistic/BlogRelatedArticleCard.server';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import BannerAnimated from '../../components/simplistic/BannerAnimated.server';
+import Seo from '../../components/Seo.client';
 import ProductsProvider from '../../contexts/ProductsProvider.client';
 import {PRODUCT_PAGE} from '../../fragments/productPage';
 import {encode} from '../../utils/shopifyGid';
@@ -114,6 +115,25 @@ export default function Product(props) {
         )}
 
         {relatedArticle && <BlogRelatedArticleCard article={relatedArticle} />}
+
+        {/* SEO */}
+        <Seo
+          page={{
+            description: sanityProduct.seo?.description,
+            image: sanityProduct.seo?.image,
+            keywords: sanityProduct.seo?.keywords,
+            product: {
+              availableForSale: productVariant?.node?.availableForSale,
+              description: sanityProduct.seo?.description,
+              price: productVariant?.node?.priceV2,
+              title: sanityProduct.seo?.title || sanityProduct?.store?.title,
+            },
+            title: `TMI | ${
+              sanityProduct.seo?.title || sanityProduct?.store?.title
+            }`,
+            type: 'product',
+          }}
+        />
       </Layout>
     </ProductsProvider>
   );

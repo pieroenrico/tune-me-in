@@ -8,8 +8,15 @@ import ProductCardOptions from './ProductCardOptions.client';
 import ProductCardPrice from './ProductCardPrice.client';
 
 const ProductCardDetails = (props) => {
-  const {className, addToCart, detailsLink, mode, onClick, selectedColor} =
-    props;
+  const {
+    className,
+    addToCart,
+    detailsLink,
+    disableProductLink,
+    mode,
+    onClick,
+    selectedColor,
+  } = props;
   const {
     id,
     handle,
@@ -72,13 +79,19 @@ const ProductCardDetails = (props) => {
         if (onClick) onClick(event);
       }}
     >
-      <LinkProduct handle={handle} variantId={variantId}>
+      {disableProductLink ? (
         <ProductCardImage image={selectedImage?.url} key={handle} />
-      </LinkProduct>
+      ) : (
+        <LinkProduct handle={handle} variantId={variantId}>
+          <ProductCardImage image={selectedImage?.url} key={handle} />
+        </LinkProduct>
+      )}
       <div className={`${mode === 'small-interactive' ? `relative` : ''}`}>
-        <div className="flex items-start justify-between mt-4">
+        <div className="flex items-start justify-between flex-col md:flex-row mt-4">
           <div
-            className={`${mode === 'small-interactive' ? `mb-6 relative` : ''}`}
+            className={`${
+              mode === 'small-interactive' ? `mb-4 md:mb-8 relative` : ''
+            }`}
           >
             <div
               className={`product-title font-main-heading text-5xl text-dark uppercase ${
@@ -138,7 +151,7 @@ const ProductCardDetails = (props) => {
           {status === 'updating' ? 'Adding...' : 'Add to Cart'}
         </Product.SelectedVariant.AddToCartButton>
       )}
-      {detailsLink && (
+      {!disableProductLink && detailsLink && (
         <LinkProduct
           handle={handle}
           variantId={variantId}

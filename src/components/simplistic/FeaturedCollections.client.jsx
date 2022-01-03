@@ -14,6 +14,7 @@ const FeaturedCollections = (props) => {
   );
   const [products, setProducts] = useState([]);
   const productsListRef = useRef();
+
   useEffect(() => {
     setProducts(
       collections.find((collection) => collection.handle === currentCollection)
@@ -29,7 +30,7 @@ const FeaturedCollections = (props) => {
   return (
     <div className="w-full border-t border-dark 3xl:container  3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
       <div className="w-full flex flex-col-reverse md:flex-row items-stretch justify-between">
-        <div className="py-4 pl-4 pr-2 w-full hidden md:block md:w-1/3">
+        <div className="py-4 pl-4 pr-2 w-full hidden lg:block md:w-1/3">
           <div className="md:sticky md:top-24">
             <ProductCard
               key={currentProduct?.productData._id}
@@ -43,7 +44,10 @@ const FeaturedCollections = (props) => {
             />
           </div>
         </div>
-        <div className="py-4 pl-2 pr-2 w-full md:w-1/3" ref={productsListRef}>
+        <div
+          className="py-4 pl-2 pr-2 w-full md:w-1/2 lg:w-1/3"
+          ref={productsListRef}
+        >
           {products.map((product) => (
             <ProductCard
               onClick={(event) => {
@@ -53,6 +57,7 @@ const FeaturedCollections = (props) => {
               key={product.productData._id}
               mode="small"
               className="mb-4 w-full cursor-pointer"
+              disableProductLink
               product={{
                 ...product.productData,
                 storefront: shopifyProducts?.[product?.productData._id],

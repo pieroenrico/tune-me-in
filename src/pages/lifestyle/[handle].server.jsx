@@ -4,12 +4,14 @@ import {useParams} from 'react-router-dom';
 
 import Layout from '../../components/Layout.server';
 import {IMAGE} from '../../fragments/image';
+import {SEO} from '../../fragments/seo';
 import {PORTABLE_TEXT} from '../../fragments/portableText';
 import PortableText from '../../components/PortableText.client';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import BlogArticles from '../../components/simplistic/BlogArticles.client';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import SectionTitle from '../../components/simplistic/SectionTitle.server';
+import Seo from '../../components/Seo.client';
 
 export default function Lifestyle({selectedArticle}) {
   const {handle} = useParams();
@@ -51,6 +53,14 @@ export default function Lifestyle({selectedArticle}) {
           </div>
         </div>
       </div>
+      <Seo
+        page={{
+          description: currentArticle.seo?.description,
+          image: currentArticle.seo?.image,
+          keywords: currentArticle.seo?.keywords,
+          title: `TMI | ${currentArticle.seo?.title}`,
+        }}
+      />
     </Layout>
   );
 }
@@ -64,6 +74,9 @@ const QUERY = groq`
     },
     image {
         ${IMAGE}
+    },
+    seo {
+      ${SEO}
     }
 }
 |order(_updatedAt desc)

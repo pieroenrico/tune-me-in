@@ -44,8 +44,8 @@ export default function Footer() {
           </li>
         </ul>
       </div>
-      <div className="w-full md:w-3/5 flex items-start justify-start md:justify-end">
-        <div className="w-full md:w-1/2">
+      <div className="w-full md:w-3/5 flex items-start justify-start lg:justify-end">
+        <div className="w-full md:w-full lg:w-1/2">
           <h2 className="text-4xl uppercase font-main-display text-dark">
             Subscribe
           </h2>
@@ -59,12 +59,12 @@ export default function Footer() {
               />
               <button
                 type="button"
-                className="uppercase text-white font-main-heading text-2xl px-6 pt-1 flex items-center text-center bg-black"
+                className="uppercase text-white font-main-heading text-2xl px-1 pt-1 flex items-center text-center bg-black"
               >
                 Subscribe
               </button>
             </div>
-            <p className="w-full md:w-1/2 font-light">
+            <p className="w-full font-light">
               Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
               sint cillum sint consectetur cupidatat.
             </p>
@@ -73,38 +73,4 @@ export default function Footer() {
       </div>
     </div>
   );
-  // return (
-  //   <footer role="contentinfo" className="border-t border-black mt-32 p-4">
-  //     {/* Links */}
-  //     {data?.footer?.links?.map((link) => {
-  //       if (link._type === 'linkExternal') {
-  //         return (
-  //           <div key={link?._key}>
-  //             <a
-  //               href={link.url}
-  //               rel="noreferrer"
-  //               target={link.newWindow ? '_blank' : '_self'}
-  //             >
-  //               {link.title}
-  //             </a>
-  //           </div>
-  //         );
-  //       }
-  //       if (link._type === 'linkInternal') {
-  //         if (!link.slug) {
-  //           return null;
-  //         }
-
-  //         return (
-  //           <div key={link?._key}>
-  //             <Link to={link.slug}>{link.title}</Link>
-  //           </div>
-  //         );
-  //       }
-  //       return null;
-  //     })}
-
-  //     {data?.footer?.text && <PortableText blocks={data.footer.text} />}
-  //   </footer>
-  // );
 }

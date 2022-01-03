@@ -33,7 +33,7 @@ const HeroTriplet = (props) => {
         </div>
       </div>
       <div
-        className="w-full bg-cover bg-no-repeat bg-center h-screen md:h-[60vh] md:min-h-[1000px] flex items-center justify-between overflow-hidden"
+        className="w-full bg-cover bg-no-repeat bg-center h-[80vh] md:h-[80vh] md:min-h-[700px] md:max-h-[1300px] flex items-center justify-between overflow-hidden"
         style={{backgroundImage: `url('${bgImage.url}?w=1200')`}}
       >
         <div className="w-1/3 h-full hidden md:flex items-center justify-end">
@@ -65,7 +65,7 @@ const HeroTriplet = (props) => {
           </div>
         </div>
         <div className="w-[90%] mx-auto md:w-1/3 h-full flex items-center">
-          <div className="w-full" style={{height: 800}}>
+          <div className="w-full" style={{height: '90%'}}>
             <Slider
               ref={mainSlider}
               sliderConfig={{

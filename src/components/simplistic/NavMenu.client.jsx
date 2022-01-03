@@ -1,22 +1,42 @@
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const NavMenu = (props) => {
   const {homeLink, className} = props;
   return (
     <>
-      {homeLink && <Link to="/">Home</Link>}
-      <Link to="/about" className={className}>
+      {homeLink && (
+        <NavLink exact to="/">
+          Home
+        </NavLink>
+      )}
+      <NavLink
+        to="/about"
+        className={className}
+        activeClassName="font-semibold"
+      >
         About
-      </Link>
-      <Link to="/collections/all-products" className={className}>
+      </NavLink>
+      {/* <NavLink
+        to="/collections/all-products"
+        className={className}
+        activeClassName="font-semibold"
+      >
         T-Shirts
-      </Link>
-      <Link to="/collections" className={className}>
+      </NavLink> */}
+      <NavLink
+        to="/collections"
+        className={className}
+        activeClassName="font-semibold"
+      >
         Collections
-      </Link>
-      <Link to="/lifestyle" className={className}>
+      </NavLink>
+      <NavLink
+        to="/lifestyle"
+        className={className}
+        activeClassName="font-semibold"
+      >
         Lifestyle
-      </Link>
+      </NavLink>
     </>
   );
 };

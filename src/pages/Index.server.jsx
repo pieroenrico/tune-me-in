@@ -6,6 +6,7 @@ import Layout from '../components/Layout.server';
 import NotFound from '../components/NotFound.server';
 import Seo from '../components/Seo.client';
 import {IMAGE} from '../fragments/image';
+import {SEO} from '../fragments/seo';
 import {PRODUCT_WITH_VARIANT} from '../fragments/productWithVariant';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import BannerAnimated from '../components/simplistic/BannerAnimated.server';
@@ -237,6 +238,9 @@ const QUERY = groq`
           }
         }
       }
-    }
+    },
+    seo {
+      ${SEO}
+    },
   }
 `;

@@ -7,6 +7,7 @@ import {IMAGE} from '../../fragments/image';
 import {PORTABLE_TEXT} from '../../fragments/portableText';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import SectionTitle from '../../components/simplistic/SectionTitle.server';
+import Seo from '../../components/Seo.client';
 
 export default function Lifestyle() {
   const {sanityData: blogData} = useSanityQuery({
@@ -36,6 +37,14 @@ export default function Lifestyle() {
               </Link>
             </div>
           ))}
+          <Seo
+            page={{
+              description: '',
+              image: null,
+              keywords: [],
+              title: `TMI | Lifestyle`,
+            }}
+          />
           {/* <div className="w-full md:w-2/3 p-4 border-r border-dark">
             <div className="sticky top-24">
               <div

@@ -18,7 +18,7 @@ const FeaturedCollectionsList = (props) => {
                   }
                 : {}
             }
-            className={`text-big font-main-display uppercase ${
+            className={`md:text-big lg:text-[5em] lg:leading-[1em] 2xl:text-big font-main-display uppercase ${
               selectedCollection === collection.handle
                 ? `text-black underline`
                 : `text-dark`
