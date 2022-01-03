@@ -12,6 +12,8 @@ import ProductDetails from '../../components/simplistic/ProductDetails.client';
 import FeaturedCollection from '../../components/simplistic/FeaturedCollection.server';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import BlogRelatedArticleCard from '../../components/simplistic/BlogRelatedArticleCard.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
+import BannerAnimated from '../../components/simplistic/BannerAnimated.server';
 import ProductsProvider from '../../contexts/ProductsProvider.client';
 import {PRODUCT_PAGE} from '../../fragments/productPage';
 import {encode} from '../../utils/shopifyGid';
@@ -86,6 +88,18 @@ export default function Product(props) {
         >
           <ProductDetails product={product} />
         </ProductProvider>
+
+        {product.store.productType === 'ACCESSORIES' && (
+          <BannerAnimated
+            data={{
+              title: 'Step in',
+              duration: '100s',
+              repeat: 10,
+              fgImage: {url: '/img/banner2-fg.png'},
+              bgImage: {url: '/img/banner2-bg.jpg'},
+            }}
+          />
+        )}
 
         {relatedCollection && (
           <FeaturedCollection
