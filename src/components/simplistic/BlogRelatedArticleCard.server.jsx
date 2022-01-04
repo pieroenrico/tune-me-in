@@ -1,5 +1,7 @@
 import {Link} from 'react-router-dom';
 
+import LazyLoad from './LazyLoad.client';
+
 const BlogRelatedArticleCard = (props) => {
   const {article} = props;
   const {title, extract, image, slug} = article;
@@ -16,9 +18,10 @@ const BlogRelatedArticleCard = (props) => {
             </div>
           </div>
           <div className="w-full md:w-2/3 p-4">
-            <div
+            <LazyLoad
+              asBackground
+              src={`${image.url}?w=900`}
               className="border border-dark bg-grey aspect-w-3 aspect-h-2 bg-center bg-cover"
-              style={{backgroundImage: `url('${image.url}')`}}
             />
           </div>
         </div>

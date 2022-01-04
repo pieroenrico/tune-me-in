@@ -4,6 +4,7 @@ import ProductCardOptions from './ProductCardOptions.client';
 import ProductDetailsInfo from './ProductDetailsInfo.client';
 import ProductCardPrice from './ProductCardPrice.client';
 import {Slider, Slide} from './Slider.client';
+import LazyLoad from './LazyLoad.client';
 
 const ProductDetails = (props) => {
   const {product} = props;
@@ -64,9 +65,11 @@ const ProductDetails = (props) => {
                 event.preventDefault();
                 handleImageClick(image.node.altText);
               }}
-              key={idx}
+              key={`${idx}-${product?._id}`}
             >
-              <img src={image.node.url} alt="" className="" />
+              <div className="w-full aspect-w-1 aspect-h-1">
+                <LazyLoad src={image.node.url} alt="" className="" />
+              </div>
             </div>
           ))}
         </div>
@@ -84,7 +87,7 @@ const ProductDetails = (props) => {
           }}
         >
           {images.edges.map((image, idx) => (
-            <Slide key={idx}>
+            <Slide key={`${idx}-${product?._id}`}>
               <div
                 className="bg-grey border border-dark mb-4 cursor-pointer"
                 onClick={(event) => {
@@ -93,7 +96,7 @@ const ProductDetails = (props) => {
                 }}
                 key={idx}
               >
-                <img src={image.node.url} alt="" className="" />
+                <LazyLoad src={image.node.url} alt="" />
               </div>
             </Slide>
           ))}
@@ -106,9 +109,11 @@ const ProductDetails = (props) => {
               ':',
               '-',
             )}`}`}
-            key={idx}
+            key={`${idx}-${product?._id}`}
           >
-            <img src={image.node.url} alt="" className="" />
+            <div className="w-full aspect-w-1 aspect-h-1">
+              <LazyLoad src={image.node.url} alt="" className="" />
+            </div>
           </div>
         ))}
       </div>
