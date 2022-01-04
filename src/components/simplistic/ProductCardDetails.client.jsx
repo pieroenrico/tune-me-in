@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Product, useProduct, useCart} from '@shopify/hydrogen/client';
 
+import useToggle from '../../hooks/useToggle';
 import LinkProduct from '../LinkProduct.client';
 
 import ProductCardImage from './ProductCardImage.client';
@@ -39,6 +40,7 @@ const ProductCardDetails = (props) => {
       : null;
 
   const [selectedImage, setSelectedImage] = useState();
+  const [isHovering, setIsHovering] = useToggle(false);
   useEffect(() => {
     // eslint-disable-next-line no-negated-condition
     if (mode !== 'small') {
@@ -74,6 +76,7 @@ const ProductCardDetails = (props) => {
 
   return (
     <div
+      onMouseEnter={() => setIsHovering(true)}
       className={`product-card border border-dark p-4 transition-all bg-light-b group hover:bg-light-ff ${className}`}
       onClick={(event) => {
         if (onClick) onClick(event);
@@ -102,7 +105,8 @@ const ProductCardDetails = (props) => {
             >
               <Product.Title />
             </div>
-            {mode !== 'small' && (
+            {(mode === 'big' ||
+              (mode === 'small-interactive' && isHovering)) && (
               <div
                 className={`flex items-start justify-between mb-4 w-full ${
                   // eslint-disable-next-line no-nested-ternary

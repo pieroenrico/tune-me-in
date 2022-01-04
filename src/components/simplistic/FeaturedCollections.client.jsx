@@ -37,6 +37,7 @@ const FeaturedCollections = (props) => {
               addToCart
               detailsLink
               className="w-full"
+              mode="big"
               product={{
                 ...currentProduct?.productData,
                 storefront: shopifyProducts?.[currentProduct?.productData._id],

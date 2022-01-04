@@ -10,7 +10,6 @@ import ResponsiveProvider from './components/simplistic/providers/ResponsiveProv
 
 export default function App({...serverState}) {
   const pages = import.meta.globEager('./pages/**/*.server.(jsx|tsx)');
-
   return (
     <Suspense>
       <ShopifyServerProvider shopifyConfig={shopifyConfig} {...serverState}>

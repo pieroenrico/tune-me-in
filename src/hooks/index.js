@@ -1,5 +1,3 @@
-import { useTimeout } from './useTimeout'
+import {useToggle} from './useToggle';
 
-export {
-    useTimeout
-}
+export {useToggle};

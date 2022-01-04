@@ -4,6 +4,15 @@ import ProductCard from './ProductCard.client';
 import {Slider, Slide} from './Slider.client';
 import {useResponsive} from './providers/ResponsiveProvider.client';
 
+const featuredCollectionSliderConfig = {
+  slides: {
+    perView: 1.2,
+    spacing: 4,
+  },
+  loop: false,
+  initial: 0,
+};
+
 const FeaturedCollection = (props) => {
   const {title, products} = props;
   const {screens} = useResponsive();
@@ -16,12 +25,7 @@ const FeaturedCollection = (props) => {
         <DragBadge />
         <Slider
           sliderConfig={{
-            slides: {
-              perView: 1.2,
-              spacing: 4,
-            },
-            loop: false,
-            initial: 0,
+            ...featuredCollectionSliderConfig,
             breakpoints: {
               [screens.md.mediaQuery]: {
                 slides: {
