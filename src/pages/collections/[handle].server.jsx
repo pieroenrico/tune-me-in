@@ -10,15 +10,23 @@ import SectionTitle from '../../components/simplistic/SectionTitle.server';
 import CollectionHeader from '../../components/simplistic/CollectionHeader.server';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import ProductCard from '../../components/simplistic/ProductCard.client';
+import CollectionPagination from '../../components/simplistic/CollectionPagination.client';
 import Seo from '../../components/Seo.client';
 import {COLLECTION_PAGE} from '../../fragments/collectionPage';
 
-export default function Collection() {
+export default function Collection({currentPage}) {
+  const pageSize = 6;
+  const page = currentPage || 0;
+  const start = page * pageSize;
+  const end = start + (pageSize - 1);
+
   const {handle} = useParams();
   const {sanityData: sanityCollection, shopifyProducts} = useSanityQuery({
     query: QUERY,
     params: {
       slug: handle,
+      start,
+      end,
     },
     getProductGraphQLFragment: () => {
       return `
@@ -39,13 +47,17 @@ export default function Collection() {
     return <NotFound />;
   }
 
-  console.log(sanityCollection.image);
+  const totalItems = sanityCollection.totalProducts;
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  // console.log(sanityCollection);
 
   return (
     <Layout>
       <div className="w-full mt-24">
         <SectionTitle title={sanityCollection.title} />
         <CollectionHeader image={sanityCollection.image} />
+
         <div className="px-4 pb-4 grid grid-cols-1 md:grid-cols-3 gap-4 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
           {sanityCollection.products.map((sanityProduct) => (
             <ProductCard
@@ -60,6 +72,9 @@ export default function Collection() {
             />
           ))}
         </div>
+        <div className="my-4">
+          <CollectionPagination totalPages={totalPages} currentPage={page} />
+        </div>
       </div>
       <Seo
         page={{
@@ -71,52 +86,6 @@ export default function Collection() {
       />
     </Layout>
   );
-
-  // return (
-  //   <Layout>
-  //     <div className="p-4">
-  //       <div className="mb-20">
-  //         {/* Title */}
-  //         <h1 className="font-medium text-3xl">
-  //           {sanityCollection.title}{' '}
-  //           <span className="font-normal text-gray-400">
-  //             (
-  //             {pluralize(
-  //               'product',
-  //               sanityCollection?.products?.length || 0,
-  //               true,
-  //             )}
-  //             )
-  //           </span>
-  //         </h1>
-
-  //         {/* Description */}
-  //         {sanityCollection?.description && (
-  //           <div className="font-normal max-w-3xl text-gray-500 text-3xl">
-  //             {sanityCollection.description}
-  //           </div>
-  //         )}
-  //       </div>
-
-  //       <ProductListing
-  //         products={sanityCollection?.products?.map((product) => ({
-  //           ...product,
-  //           storefront: shopifyProducts?.[product?._id],
-  //         }))}
-  //       />
-  //     </div>
-
-  //     {/* SEO */}
-  //     <Seo
-  //       page={{
-  //         description: sanityCollection.seo?.description,
-  //         image: sanityCollection.seo?.image,
-  //         keywords: sanityCollection.seo?.keywords,
-  //         title: sanityCollection.seo?.title,
-  //       }}
-  //     />
-  //   </Layout>
-  // );
 }
 
 const QUERY = groq`
@@ -127,6 +96,7 @@ const QUERY = groq`
     ${COLLECTION_PAGE}
   } {
     ...,
-    products[available]
+    "totalProducts": count(products[available]),
+    products[available][$start..$end]
   }
 `;
