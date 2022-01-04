@@ -10,6 +10,7 @@ import SectionTitle from '../../components/simplistic/SectionTitle.server';
 import CollectionHeader from '../../components/simplistic/CollectionHeader.server';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import ProductCard from '../../components/simplistic/ProductCard.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
 import CollectionPagination from '../../components/simplistic/CollectionPagination.client';
 import Seo from '../../components/Seo.client';
 import {COLLECTION_PAGE} from '../../fragments/collectionPage';
@@ -72,7 +73,7 @@ export default function Collection({currentPage}) {
             />
           ))}
         </div>
-        <div className="my-4">
+        <div className="mb-4">
           <CollectionPagination totalPages={totalPages} currentPage={page} />
         </div>
       </div>

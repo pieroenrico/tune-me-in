@@ -45,27 +45,6 @@ export default function Lifestyle() {
               title: `TMI | Lifestyle`,
             }}
           />
-          {/* <div className="w-full md:w-2/3 p-4 border-r border-dark">
-            <div className="sticky top-24">
-              <div
-                className="w-full aspect-w-5 aspect-h-4 md:aspect-h-3 bg-grey border border-dark mb-4 bg-center bg-cover bg-no-repeat"
-                style={{backgroundImage: `url('${currentArticle.image.url}')`}}
-              />
-              <PortableText blocks={currentArticle.body} />
-            </div>
-          </div>
-          <div className="w-full md:w-1/3 p-4">
-            <BlogArticles
-              articles={blogData
-                .filter((article) => article.slug.current !== selectedSlug)
-                .map((article) => ({
-                  slug: article.slug,
-                  title: article.title,
-                  image: article.image,
-                  extract: article.extract,
-                }))}
-            />
-          </div> */}
         </div>
       </div>
     </Layout>
