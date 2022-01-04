@@ -1,11 +1,14 @@
 import {Link} from 'react-router-dom';
 
+import LazyLoad from './LazyLoad.client';
+
 const BlogCardImage = (props) => {
   const {image} = props;
   return (
     <div className="relative bg-grey border border-secondary aspect-w-2 aspect-h-1 overflow-hidden">
-      <div
-        style={{backgroundImage: `url('${image.url}')`}}
+      <LazyLoad
+        adBackground
+        src={`${image.url}?w=900`}
         className="product-image w-full h-full bg-cover bg-no-repeat bg-center translate-y-0 transition-all"
       />
     </div>

@@ -1,5 +1,7 @@
 import {Link} from 'react-router-dom';
 
+import LazyLoad from './LazyLoad.client';
+
 const CollectionCard = ({collection, odd}) => {
   const {title, slug, image} = collection;
   return (
@@ -9,9 +11,10 @@ const CollectionCard = ({collection, odd}) => {
           odd ? `md:flex-row-reverse` : ``
         }`}
       >
-        <div
+        <LazyLoad
+          asBackground
           className="w-full md:w-2/3 aspect-w-5 aspect-h-3 md:aspect-h-2 bg-grey border border-dark bg-center bg-cover bg-no-repeat md:grayscale md:transition-all md:group-hover:grayscale-0"
-          style={{backgroundImage: `url('${image.url}?w=900')`}}
+          src={`${image.url}?w=900`}
         />
 
         <div className="w-full md:w-1/3 flex items-center justify-start">

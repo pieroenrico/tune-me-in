@@ -11,6 +11,8 @@ import PortableText from '../../components/PortableText.client';
 import BlogArticles from '../../components/simplistic/BlogArticles.client';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import SectionTitle from '../../components/simplistic/SectionTitle.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
+import LazyLoad from '../../components/simplistic/LazyLoad.client';
 import Seo from '../../components/Seo.client';
 
 export default function Lifestyle({selectedArticle}) {
@@ -32,10 +34,12 @@ export default function Lifestyle({selectedArticle}) {
         <div className="flex items-stretch justify-between flex-col md:flex-row 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
           <div className="w-full md:w-2/3 p-4 border-r border-dark">
             <div className="sticky top-24">
-              <div
+              <LazyLoad
+                asBackground
+                src={`${currentArticle.image.url}?w=1000`}
                 className="w-full aspect-w-5 aspect-h-4 md:aspect-h-3 bg-grey border border-dark mb-4 bg-center bg-cover bg-no-repeat"
-                style={{backgroundImage: `url('${currentArticle.image.url}')`}}
               />
+
               <PortableText blocks={currentArticle.body} />
             </div>
           </div>

@@ -5,6 +5,8 @@ import {IMAGE} from '../fragments/image';
 import {SEO} from '../fragments/seo';
 import Layout from '../components/Layout.server';
 import Seo from '../components/Seo.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
+import LazyLoad from '../components/simplistic/LazyLoad.client';
 
 export default function About() {
   const {sanityData: sanityPage} = useSanityQuery({
@@ -19,17 +21,20 @@ export default function About() {
           {title}
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          <div
+          <LazyLoad
+            asBackground
+            src={`${image1.url}?w=900`}
             className="border border-dark bg-grey aspect-w-3 aspect-h-4 bg-cover bg-no-repeat bg-center"
-            style={{backgroundImage: `url('${image1.url}?w=900')`}}
           />
-          <div
+          <LazyLoad
+            asBackground
+            src={`${image2.url}?w=900`}
             className="border border-dark bg-grey aspect-w-3 aspect-h-4 bg-cover bg-no-repeat bg-center"
-            style={{backgroundImage: `url('${image2.url}?w=900')`}}
           />
-          <div
+          <LazyLoad
+            asBackground
+            src={`${image3.url}?w=900`}
             className="border border-dark bg-grey aspect-w-3 aspect-h-4 bg-cover bg-no-repeat bg-center"
-            style={{backgroundImage: `url('${image3.url}?w=900')`}}
           />
         </div>
         <div className="text-dark py-4">
@@ -39,17 +44,19 @@ export default function About() {
           <div className="w-full md:w-1/2 flex items-center justify-center mb-8 md:mb-0">
             <p className="w-full md:w-1/2 text-dark font-light">{text2}</p>
           </div>
-          <div
+          <LazyLoad
+            asBackground
+            src={`${image4.url}?w=900`}
             className="border border-dark bg-grey w-full md:w-1/2 aspect-w-3 aspect-h-2 md:aspect-h-1 bg-cover bg-no-repat bg-center"
-            style={{backgroundImage: `url('${image4.url}?w=900')`}}
           />
         </div>
         <h2 className="text-dark text-[6em] md:text-[18em] leading-[.85em] md:leading-[.75em] uppercase font-main-display w-full md:w-3/4">
           {title2}
         </h2>
-        <div
+        <LazyLoad
+          asBackground
+          src={`${image5.url}?w=1200`}
           className="my-8 border border-dark bg-grey w-full aspect-w-5 aspect-h-3 bg-cover bg-no-repeat bg-center"
-          style={{backgroundImage: `url('${image5.url}?w=1200')`}}
         />
       </div>
       <Seo

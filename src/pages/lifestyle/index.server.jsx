@@ -7,6 +7,8 @@ import {IMAGE} from '../../fragments/image';
 import {PORTABLE_TEXT} from '../../fragments/portableText';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import SectionTitle from '../../components/simplistic/SectionTitle.server';
+// eslint-disable-next-line @shopify/strict-component-boundaries
+import LazyLoad from '../../components/simplistic/LazyLoad.client';
 import Seo from '../../components/Seo.client';
 
 export default function Lifestyle() {
@@ -26,9 +28,10 @@ export default function Lifestyle() {
           {blogData.map((article, adx) => (
             <div key={adx} className="border border-secondary p-4">
               <Link to={`/lifestyle/${article.slug.current}`}>
-                <div
+                <LazyLoad
+                  asBackground
+                  src={article.image.url}
                   className="w-full bg-grey border border-secondary aspect-w-5 aspect-h-3 mb-4 bg-center bg-cover bg-no-repeat"
-                  style={{backgroundImage: `url('${article.image.url}')`}}
                 />
                 <div className="text-secondary text-[4em] uppercase font-main-heading leading-[1em]">
                   {article.title}

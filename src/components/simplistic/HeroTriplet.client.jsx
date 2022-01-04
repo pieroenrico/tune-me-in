@@ -1,6 +1,7 @@
 import {useRef} from 'react';
 
 import {Slider, Slide} from './Slider.client';
+import LazyLoad from './LazyLoad.client';
 
 const HeroTriplet = (props) => {
   const {data} = props;
@@ -32,9 +33,10 @@ const HeroTriplet = (props) => {
           Tune Me In
         </div>
       </div>
-      <div
-        className="w-full bg-cover bg-no-repeat bg-center h-[80vh] md:h-[80vh] md:min-h-[700px] md:max-h-[1300px] flex items-center justify-between overflow-hidden"
-        style={{backgroundImage: `url('${bgImage.url}?w=1200')`}}
+      <LazyLoad
+        asBackground
+        src={`${bgImage.url}?w=1200`}
+        className="w-full bg-dark bg-cover bg-no-repeat bg-center h-[80vh] md:h-[80vh] md:min-h-[700px] md:max-h-[1300px] flex items-center justify-between overflow-hidden"
       >
         <div className="w-1/3 h-full hidden md:flex items-center justify-end">
           <div
@@ -55,9 +57,10 @@ const HeroTriplet = (props) => {
             >
               {carousel.map((slide, idx) => (
                 <Slide key={idx}>
-                  <div
+                  <LazyLoad
+                    asBackground
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{backgroundImage: `url('${slide.image.url}?w=900')`}}
+                    src={`${slide.image.url}?w=900`}
                   />
                 </Slide>
               ))}
@@ -82,11 +85,10 @@ const HeroTriplet = (props) => {
             >
               {carousel.map((slide, idx) => (
                 <Slide key={idx}>
-                  <div
+                  <LazyLoad
+                    asBackground
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{
-                      backgroundImage: `url('${slide.image.url}?w=900')`,
-                    }}
+                    src={`${slide.image.url}?w=900`}
                   />
                 </Slide>
               ))}
@@ -112,16 +114,17 @@ const HeroTriplet = (props) => {
             >
               {carousel.map((slide, idx) => (
                 <Slide key={idx}>
-                  <div
+                  <LazyLoad
+                    asBackground
                     className="w-full h-full bg-center bg-cover bg-no-repeat"
-                    style={{backgroundImage: `url('${slide.image.url}?w=900')`}}
+                    src={`${slide.image.url}?w=900`}
                   />
                 </Slide>
               ))}
             </Slider>
           </div>
         </div>
-      </div>
+      </LazyLoad>
     </div>
   );
 };

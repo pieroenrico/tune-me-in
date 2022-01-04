@@ -1,10 +1,12 @@
+import LazyLoad from './LazyLoad.client';
+
 const BannerAnimated = (props) => {
   const {data} = props;
   const {title, duration, repeat, bgImage, fgImage} = data;
   return (
     <div className="w-full bg-dark relative 3xl:container 3xl:mx-auto">
       <div className="w-full absolute z-10">
-        <img src={fgImage.url} alt="" className="w-full" />
+        <LazyLoad src={fgImage.url} alt={title} className="w-full" />
       </div>
       <div className="w-full h-full flex items-center absolute top-0 left-0">
         <div className="relative w-full h-full overflow-hidden">
@@ -19,7 +21,7 @@ const BannerAnimated = (props) => {
         </div>
       </div>
       <div className="w-full">
-        <img src={bgImage.url} alt="" className="w-full" />
+        <LazyLoad src={bgImage.url} alt={title} className="w-full" />
       </div>
     </div>
   );
