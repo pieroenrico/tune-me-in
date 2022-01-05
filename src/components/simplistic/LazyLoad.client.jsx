@@ -4,7 +4,8 @@ const placeholder =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 
 const LazyLoad = (props) => {
-  const {src, alt, className, asBackground, children} = props;
+  const {src, alt, className, asBackground, threshold, rootMargin, children} =
+    props;
 
   const [imageSrc, setImageSrc] = useState(placeholder);
   const [imageRef, setImageRef] = useState();
@@ -27,8 +28,8 @@ const LazyLoad = (props) => {
             });
           },
           {
-            threshold: 0.01,
-            rootMargin: '75%',
+            threshold,
+            rootMargin,
           },
         );
         observer.observe(imageRef);
@@ -84,6 +85,8 @@ const LazyLoadBackground = (props) => {
 
 LazyLoad.defaultProps = {
   asBackground: false,
+  threshold: 0.01,
+  rootMargin: '75%',
 };
 
 export default LazyLoad;

@@ -9,8 +9,14 @@ import CollectionFilters from '../../components/simplistic/CollectionFilters.cli
 import SectionTitle from '../../components/simplistic/SectionTitle.server';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import ProductCard from '../../components/simplistic/ProductCard.client';
+// eslint-disable-next-line @shopify/strict-component-boundaries
+import CollectionPagination from '../../components/simplistic/CollectionPagination.client';
 
-export default function Collection({color, size}) {
+export default function Collection({currentPage, color, size}) {
+  const pageSize = 6;
+  const page = currentPage || 0;
+  const start = page * pageSize;
+  const end = start + (pageSize - 1);
   const colorFilter = color === undefined ? null : color;
   const sizeFilter = size === undefined ? null : size;
   const {sanityData: sanityCollection, shopifyProducts} = useSanityQuery({
@@ -21,6 +27,8 @@ export default function Collection({color, size}) {
       applyColorFilter: colorFilter !== null,
       size: sizeFilter,
       applySizeFilter: sizeFilter !== null,
+      start,
+      end,
     },
     getProductGraphQLFragment: () => {
       return `
@@ -37,18 +45,25 @@ export default function Collection({color, size}) {
     },
   });
 
-  //   console.log(shopifyProducts);
+  console.log(sanityCollection.products);
 
   if (!sanityCollection) {
     return <NotFound />;
   }
 
-  const filters = parseFilters(sanityCollection);
-
+  const totalItems = sanityCollection.totalProducts;
+  const totalPages = Math.ceil(totalItems / pageSize);
+  const filters = parseFilters(
+    sanityCollection.products,
+    sanityCollection.filters,
+  );
   return (
     <Layout>
       <div className="mt-20 pt-4">
         <SectionTitle title="All T-Shirts" />
+        <div className="mt-4">
+          <CollectionPagination totalPages={totalPages} currentPage={page} />
+        </div>
         <div className="w-full flex items-stretch justify-between flex-col md:flex-row 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
           <div className="w-full md:w-[20%] p-4">
             {filters && (
@@ -64,7 +79,7 @@ export default function Collection({color, size}) {
           </div>
           <div className="w-full md:w-[80%]">
             <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 py-4 pr-4 pl-4 md:pl-0">
-              {sanityCollection.map((sanityProduct) => (
+              {sanityCollection.products.map((sanityProduct) => (
                 <ProductCard
                   key={sanityProduct._id}
                   product={{
@@ -85,34 +100,62 @@ export default function Collection({color, size}) {
   );
 }
 const QUERY = groq`
-    *[
+    {
+      "filters": *[
+          _type == "product" 
+          && store.productType == "Shirts"
+          && store.tags match $storeTag
+          && "Color" in store.options[]._key
+      ]
+      {
+          "Color": store.options[1].values, 
+          "Size": store.options[0].values
+      }[],
+      "products": *[
         _type == "product" 
         && store.productType == "Shirts"
         && store.tags match $storeTag
         && "Color" in store.options[]._key
-    ]
-    {
-        ..., 
-        "slug": store.slug.current,
-        "colorOption": store.options[1].values, 
-        "sizeOption": store.options[0].values
-    }
-    [
-        (colorOption match $color || !$applyColorFilter)
-        &&
-        (sizeOption match $size || !$applySizeFilter)
-    ]
-    []
-    {
-        _id,
-        "available": !store.isDeleted && store.status == 'active',
-        "slug": store.slug.current,
-        store,
-        "variantId": coalesce(^.variant->store.id, store.variants[0]->store.id)
+      ]
+      {
+          ..., 
+          "slug": store.slug.current,
+          "colorOption": store.options[1].values, 
+          "sizeOption": store.options[0].values
+      }
+      [
+          (colorOption match $color || !$applyColorFilter)
+          &&
+          (sizeOption match $size || !$applySizeFilter)
+      ]
+      {
+          _id,
+          "available": !store.isDeleted && store.status == 'active',
+          "slug": store.slug.current,
+          store,
+          "variantId": coalesce(^.variant->store.id, store.variants[0]->store.id)
+      }[$start..$end],
+      "totalProducts": count(*[
+              _type == "product" 
+              && store.productType == "Shirts"
+              && store.tags match $storeTag
+              && "Color" in store.options[]._key
+          ]
+          {
+              ..., 
+              "slug": store.slug.current,
+              "colorOption": store.options[1].values, 
+              "sizeOption": store.options[0].values
+          }
+          [
+              (colorOption match $color || !$applyColorFilter)
+              &&
+              (sizeOption match $size || !$applySizeFilter)
+          ][])
     }
 `;
 
-const parseFilters = (products) => {
+const parseFilters = (products, filters) => {
   let filterKeys = [];
   products.forEach((product) => {
     product.store.options.forEach((option) => {
@@ -121,21 +164,15 @@ const parseFilters = (products) => {
         .concat([
           {
             id: option._key,
-            values: [],
+            values: [
+              ...new Set(
+                [].concat(...filters.map((filter) => filter[option._key])),
+              ),
+            ],
           },
         ]);
     });
   });
-  products.forEach((product) => {
-    product.store.options.forEach((option) => {
-      const filterKey = filterKeys.find((fKey) => fKey.id === option._key);
-      filterKey.values = filterKey.values.concat(
-        option.values.map((value) =>
-          filterKey.values.includes(value) ? null : value,
-        ),
-      );
-      filterKey.values = filterKey.values.filter((value) => value);
-    });
-  });
+
   return filterKeys;
 };

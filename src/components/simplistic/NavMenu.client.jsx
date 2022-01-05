@@ -16,14 +16,15 @@ const NavMenu = (props) => {
       >
         About
       </NavLink>
-      {/* <NavLink
+      <NavLink
         to="/collections/all-products"
         className={className}
         activeClassName="font-semibold"
       >
-        T-Shirts
-      </NavLink> */}
+        Shirts
+      </NavLink>
       <NavLink
+        exact
         to="/collections"
         className={className}
         activeClassName="font-semibold"

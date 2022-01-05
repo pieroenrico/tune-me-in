@@ -203,7 +203,23 @@ body {
 /* stylelint-enable */
 .dragable-collection .drag {
   @apply opacity-0 transition-all;
+  animation: drag 15s linear infinite;
 }
 .dragable-collection:hover .drag {
   @apply opacity-100;
+}
+@keyframes drag {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: calc(100% - 200px);
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px black;
 }

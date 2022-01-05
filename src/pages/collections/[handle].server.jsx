@@ -5,8 +5,6 @@ import {useParams} from 'react-router-dom';
 import Layout from '../../components/Layout.server';
 import NotFound from '../../components/NotFound.server';
 // eslint-disable-next-line @shopify/strict-component-boundaries
-import SectionTitle from '../../components/simplistic/SectionTitle.server';
-// eslint-disable-next-line @shopify/strict-component-boundaries
 import CollectionHeader from '../../components/simplistic/CollectionHeader.server';
 // eslint-disable-next-line @shopify/strict-component-boundaries
 import ProductCard from '../../components/simplistic/ProductCard.client';
@@ -55,10 +53,14 @@ export default function Collection({currentPage}) {
 
   return (
     <Layout>
-      <div className="w-full mt-24">
-        <SectionTitle title={sanityCollection.title} />
-        <CollectionHeader image={sanityCollection.image} />
-
+      <div className="w-full">
+        <CollectionHeader
+          image={sanityCollection.image}
+          title={sanityCollection.title}
+        />
+        <div className="mb-4">
+          <CollectionPagination totalPages={totalPages} currentPage={page} />
+        </div>
         <div className="px-4 pb-4 grid grid-cols-1 md:grid-cols-3 gap-4 3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark">
           {sanityCollection.products.map((sanityProduct) => (
             <ProductCard

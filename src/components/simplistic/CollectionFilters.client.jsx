@@ -31,6 +31,7 @@ const CollectionFilters = (props) => {
                   className="text-xs text-dark"
                   onClick={(event) => {
                     event.preventDefault();
+                    setServerState('currentPage', 0);
                     setServerState(filterKey.id.toLowerCase(), null);
                   }}
                 >
@@ -48,6 +49,7 @@ const CollectionFilters = (props) => {
                   } leading-[100%] bg-product-${value.toLowerCase()}`}
                   onClick={(event) => {
                     event.preventDefault();
+                    setServerState('currentPage', 0);
                     setServerState(filterKey.id.toLowerCase(), value);
                   }}
                 />
@@ -66,6 +68,7 @@ const CollectionFilters = (props) => {
                   className="text-xs text-dark"
                   onClick={(event) => {
                     event.preventDefault();
+                    setServerState('currentPage', 0);
                     setServerState(filterKey.id.toLowerCase(), null);
                   }}
                 >
@@ -83,6 +86,7 @@ const CollectionFilters = (props) => {
                   } leading-[100%]`}
                   onClick={(event) => {
                     event.preventDefault();
+                    setServerState('currentPage', 0);
                     setServerState(filterKey.id.toLowerCase(), value);
                   }}
                 >

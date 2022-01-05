@@ -40,7 +40,11 @@ export default function HeaderScroll() {
   }, []);
 
   useEffect(() => {
-    setAlwaysBlack(location.pathname !== '/');
+    setAlwaysBlack(
+      location.pathname !== '/' &&
+        (!location.pathname.includes('/collections/') ||
+          location.pathname.includes('all-products')),
+    );
 
     if (location.pathname !== prevLocation) setMobileMenuOpen(false);
   }, [location]);
