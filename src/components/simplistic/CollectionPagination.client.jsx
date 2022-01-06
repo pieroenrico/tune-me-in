@@ -21,7 +21,10 @@ const CollectionPagination = (props) => {
   const isFirstPage = currentPage === 0;
   const isLastPage = currentPage === totalPages - 1;
   return (
-    <div className="flex items-center justify-center p-4 border-t border-b border-dark">
+    <div
+      className="flex items-center justify-center p-4 border-t border-b border-dark
+    3xl:container 3xl:mx-auto 3xl:border-l 3xl:border-r 3xl:border-dark"
+    >
       <PaginationButton onClick={handlePrevPage} disabled={isFirstPage}>
         <div className="w-3 h-3 mr-2">
           <IconArrowLeft />

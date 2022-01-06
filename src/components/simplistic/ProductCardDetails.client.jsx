@@ -86,7 +86,21 @@ const ProductCardDetails = (props) => {
         <ProductCardImage image={selectedImage?.url} key={handle} />
       ) : (
         <LinkProduct handle={handle} variantId={variantId}>
-          <ProductCardImage image={selectedImage?.url} key={handle} />
+          <ProductCardImage
+            image={selectedImage?.url}
+            // imageSet={
+            //   selectedImage
+            //     ? Object.keys(selectedImage)
+            //         ?.map((key) =>
+            //           key[0] === '_'
+            //             ? {id: key, url: selectedImage[key]}
+            //             : null,
+            //         )
+            //         .filter((val) => val)
+            //     : []
+            // }
+            key={handle}
+          />
         </LinkProduct>
       )}
       <div className={`${mode === 'small-interactive' ? `relative` : ''}`}>

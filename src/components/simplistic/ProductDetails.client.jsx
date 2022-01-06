@@ -68,7 +68,12 @@ const ProductDetails = (props) => {
               key={`${idx}-${product?._id}`}
             >
               <div className="w-full aspect-w-1 aspect-h-1">
-                <LazyLoad src={image.node.url} alt="" className="" />
+                <LazyLoad
+                  adaptiveSize
+                  src={image.node.url}
+                  alt=""
+                  className=""
+                />
               </div>
             </div>
           ))}
@@ -112,7 +117,7 @@ const ProductDetails = (props) => {
             key={`${idx}-${product?._id}`}
           >
             <div className="w-full aspect-w-1 aspect-h-1">
-              <LazyLoad src={image.node.url} alt="" className="" />
+              <LazyLoad adaptiveSize src={image.node.url} alt="" className="" />
             </div>
           </div>
         ))}

@@ -6,6 +6,7 @@
   font-weight: 900;
   font-style: normal;
   font-display: swap;
+  font-display: block; /* Fix flickering */
 }
 
 @font-face {
@@ -15,6 +16,7 @@
   font-weight: 900;
   font-style: normal;
   font-display: swap;
+  font-display: block; /* Fix flickering */
 }
 
 @font-face {
@@ -24,6 +26,7 @@
   font-weight: 900;
   font-style: italic;
   font-display: swap;
+  font-display: block; /* Fix flickering */
 }
 
 @font-face {
@@ -33,6 +36,7 @@
   font-weight: 900;
   font-style: normal;
   font-display: swap;
+  font-display: block; /* Fix flickering */
 }
 
 @font-face {
@@ -42,6 +46,7 @@
   font-weight: 900;
   font-style: italic;
   font-display: swap;
+  font-display: block; /* Fix flickering */
 }
 
 @tailwind base;
