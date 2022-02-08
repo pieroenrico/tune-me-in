@@ -28,7 +28,9 @@ const ProductCardDetails = (props) => {
     selectedVariant,
     mf: metafields,
     images,
+    variants,
   } = useProduct();
+
   const {status} = useCart();
   // const {media} = useProductMedia();
   const playlist =
@@ -144,7 +146,13 @@ const ProductCardDetails = (props) => {
               </div>
             )}
           </div>
-          <ProductCardPrice price={selectedVariant?.priceV2.amount} />
+          <ProductCardPrice
+            price={
+              selectedVariant
+                ? selectedVariant.priceV2.amount
+                : variants[0].priceV2.amount
+            }
+          />
         </div>
       </div>
       {playlist && (

@@ -13,7 +13,7 @@ const CollectionCard = ({collection, odd}) => {
       >
         <LazyLoad
           asBackground
-          adaptiveSize
+          // adaptiveSize
           className="w-full md:w-2/3 aspect-w-5 aspect-h-3 md:aspect-h-2 bg-grey border border-dark bg-center bg-cover bg-no-repeat md:grayscale md:transition-all md:group-hover:grayscale-0"
           src={`${image.url}`}
         />

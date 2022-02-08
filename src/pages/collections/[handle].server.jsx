@@ -35,12 +35,6 @@ export default function Collection({currentPage}) {
             node {
               altText
               url
-              _200:url(transform:{maxWidth:200})
-              _400:url(transform:{maxWidth:400})
-              _600:url(transform:{maxWidth:600})
-              _900:url(transform:{maxWidth:900})
-              _1200:url(transform:{maxWidth:1200})
-              _1600:url(transform:{maxWidth:1600})
             }
           }
         }
